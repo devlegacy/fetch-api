@@ -16,3 +16,16 @@ fetch('https://jsonplaceholder.typicode.com/posts')
   const body: Array<Post> = await response.json();
   console.log(body);
 })();
+
+// Handle error
+fetch('https://jsonplaceholder.typicode.com/pos')
+  .then((response: Response) => {
+    console.log(`Status code: ${response.status}`);
+    if (response.status >= 200 && response.status < 300) {
+      return response.json();
+    } else {
+      throw new Error('Error in the fetch request');
+    }
+  }) // response: Uint8Array
+  .then((posts: Array<Post>) => console.log(posts))
+  .catch((err: Error) => console.error('[Fetch error]:', err.message));
