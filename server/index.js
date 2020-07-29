@@ -21,8 +21,10 @@ const uploadConfig = multer({
 
 const api = (req, res) => {
   // res.header('Access-Control-Allow-Origin', 'null'); // Block cors
-  res.header('Access-Control-Allow-Origin', '*');
-  // res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Only once origin
+  // res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Only once origin | To receive cookies it cannot be a wildcard
+  res.header('Access-Control-Allow-Credentials', 'true');
+  console.log('[Server - Cookies]:', req.cookies);
   res.send({
     msg: 'Hello from api',
   });
@@ -37,9 +39,10 @@ app
     res.send('Hello node');
   })
   .options('/api/', (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // | To receive cookies it cannot be a wildcard
     res.header('Access-Control-Allow-Methods', 'PUT');
     res.header('Access-Control-Allow-Headers', 'Content-type, Authentication');
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.status(204).send();
   })
   .get('/api/', api)
@@ -50,5 +53,5 @@ app
   });
 
 app.listen(process.env.PORT || 8000, () => {
-  console.log('Server running on http://localhost:8000');
+  console.log('[Server - Node.js]:', 'Server running on http://localhost:8000');
 });

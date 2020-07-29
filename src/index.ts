@@ -101,6 +101,7 @@ fetch('http://localhost:8000/api/', { method: 'PUT' })
   .then((data) => console.log(data))
   .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
 
+// Headers
 fetch('http://localhost:8000/api/', {
   method: 'PUT',
   headers: {
@@ -108,6 +109,26 @@ fetch('http://localhost:8000/api/', {
     Accept: 'application/json; charset=UTF-8',
     Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
   },
+})
+  .then((response: Response) => response.json())
+  .then((data) => console.log(data))
+  .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
+
+// Cookies
+document.cookie = 'username=Samuel';
+fetch('http://localhost:8000/api/', {
+  method: 'PUT',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    Accept: 'application/json; charset=UTF-8',
+    Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
+  },
+  credentials: 'include',
+  /**
+   * omit: Never send or receive cookies.
+   * same-origin: Send user credentials (cookies, basic http auth, etc..) if the URL is on the same origin as the calling script. This is the default value.
+   * include: Always send user credentials (cookies, basic http auth, etc..), even for cross-origin calls.
+   */
 })
   .then((response: Response) => response.json())
   .then((data) => console.log(data))
