@@ -19,7 +19,7 @@ const uploadConfig = multer({
 
 // Node.js server
 app
-  .use('cors')
+  .use(cors)
   .get('/', (req, res) => {
     res.send('Hello node');
   })
