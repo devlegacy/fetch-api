@@ -57,6 +57,10 @@ const post: Post = {
 fetch('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
   body: JSON.stringify(post),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    Accept: 'application/json; charset=UTF-8',
+  },
 })
   .then((response: Response) => response.json()) // response: Uint8Array
   .then((post: Post) => console.log(post));
