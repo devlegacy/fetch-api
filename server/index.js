@@ -3,6 +3,8 @@ const app = express();
 const multer = require('multer');
 const mimeTypes = require('mime-types');
 const cors = require('cors');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const { resolve, parse } = require('path');
 
 // Configure storage file
@@ -17,12 +19,26 @@ const uploadConfig = multer({
   storage,
 });
 
+const api = (req, res) => {
+  // res.header('Access-Control-Allow-Origin', 'null'); // Block cors
+  // res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Only once origin
+  res.send({
+    msg: 'Hello from api',
+  });
+};
+
 // Node.js server
 app
   .use(cors())
+  .use(morgan('tiny'))
+  .use(cookieParser())
   .get('/', (req, res) => {
     res.send('Hello node');
   })
+  .get('/api/', api)
+  .post('/api/', api)
+  .put('/api/', api)
   .post('/api/upload', uploadConfig.single('file'), (req, res) => {
     res.send('Upload success');
   });

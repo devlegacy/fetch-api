@@ -90,3 +90,7 @@ document
         console.error('[Upload fetch error]:', err.message)
       );
   });
+
+fetch('http://localhost:8000/api/')
+  .then((response: Response) => response.json())
+  .then((data) => console.log(data));
