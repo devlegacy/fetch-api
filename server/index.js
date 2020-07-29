@@ -21,8 +21,8 @@ const uploadConfig = multer({
 
 const api = (req, res) => {
   // res.header('Access-Control-Allow-Origin', 'null'); // Block cors
-  // res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Only once origin
+  res.header('Access-Control-Allow-Origin', '*');
+  // res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // Only once origin
   res.send({
     msg: 'Hello from api',
   });
@@ -30,11 +30,16 @@ const api = (req, res) => {
 
 // Node.js server
 app
-  .use(cors())
+  // .use(cors())
   .use(morgan('tiny'))
   .use(cookieParser())
   .get('/', (req, res) => {
     res.send('Hello node');
+  })
+  .options('/api/', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'PUT');
+    res.status(204).send();
   })
   .get('/api/', api)
   .post('/api/', api)

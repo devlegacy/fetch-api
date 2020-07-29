@@ -91,6 +91,12 @@ document
       );
   });
 
-fetch('http://localhost:8000/api/')
+fetch('http://localhost:8000/api/', { method: 'GET' })
   .then((response: Response) => response.json())
-  .then((data) => console.log(data));
+  .then((data) => console.log(data))
+  .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
+
+fetch('http://localhost:8000/api/', { method: 'PUT' })
+  .then((response: Response) => response.json())
+  .then((data) => console.log(data))
+  .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
