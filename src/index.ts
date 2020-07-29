@@ -6,7 +6,10 @@ export interface Post {
 }
 
 fetch('https://jsonplaceholder.typicode.com/posts')
-  .then((response: Response) => response.json()) // response: Uint8Array
+  .then((response: Response) => {
+    console.log(typeof response);
+    return response.json();
+  }) // response: Uint8Array
   .then((posts: Array<Post>) => console.log(posts));
 
 (async () => {
