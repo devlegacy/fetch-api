@@ -29,3 +29,17 @@ fetch('https://jsonplaceholder.typicode.com/pos')
   }) // response: Uint8Array
   .then((posts: Array<Post>) => console.log(posts))
   .catch((err: Error) => console.error('[Fetch error]:', err.message));
+
+// Read more on: https://fetch.spec.whatwg.org/#fetch-api
+const queryParams = {
+  userId: 1,
+  _limit: 3,
+};
+const url: URL = new URL('https://jsonplaceholder.typicode.com/posts');
+Object.keys(queryParams).forEach((paramKey: string) => {
+  url.searchParams.append(paramKey, queryParams[paramKey]);
+});
+console.log(url);
+fetch(url.href)
+  .then((response: Response) => response.json()) // response: Uint8Array
+  .then((posts: Array<Post>) => console.log(posts));
