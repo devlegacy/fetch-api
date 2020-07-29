@@ -1,6 +1,6 @@
 export interface Post {
   userId: number;
-  id: number;
+  id?: number;
   title: string;
   body: string;
 }
@@ -30,6 +30,7 @@ fetch('https://jsonplaceholder.typicode.com/pos')
   .then((posts: Array<Post>) => console.log(posts))
   .catch((err: Error) => console.error('[Fetch error]:', err.message));
 
+// Query params
 // Read more on: https://fetch.spec.whatwg.org/#fetch-api
 const queryParams = {
   userId: 1,
@@ -43,3 +44,19 @@ console.log(url);
 fetch(url.href)
   .then((response: Response) => response.json()) // response: Uint8Array
   .then((posts: Array<Post>) => console.log(posts));
+
+// Methods http
+// Read more on: https://developer.mozilla.org/es/docs/Web/HTTP/Methods
+
+// POST
+const post: Post = {
+  userId: 1,
+  title: 'foo',
+  body: 'bar',
+};
+fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify(post),
+})
+  .then((response: Response) => response.json()) // response: Uint8Array
+  .then((post: Post) => console.log(post));
