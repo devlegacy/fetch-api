@@ -9,8 +9,8 @@ const { resolve, parse } = require('path');
 const storage = multer.diskStorage({
   destination: resolve(`${__dirname}/uploads/`),
   filename: function (req, file, cb) {
-    const filename = parse(file).name;
-    cb('', `${Date.now}_${filename}.${mimeTypes.extension(file.mimetype)}`);
+    const filename = parse(file.originalname).name;
+    cb('', `${Date.now()}_${filename}.${mimeTypes.extension(file.mimetype)}`);
   },
 });
 const uploadConfig = multer({
