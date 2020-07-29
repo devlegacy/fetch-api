@@ -39,6 +39,7 @@ app
   .options('/api/', (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'PUT');
+    res.header('Access-Control-Allow-Headers', 'Content-type, Authentication');
     res.status(204).send();
   })
   .get('/api/', api)

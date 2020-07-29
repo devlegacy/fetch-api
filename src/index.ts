@@ -100,3 +100,15 @@ fetch('http://localhost:8000/api/', { method: 'PUT' })
   .then((response: Response) => response.json())
   .then((data) => console.log(data))
   .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
+
+fetch('http://localhost:8000/api/', {
+  method: 'PUT',
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    Accept: 'application/json; charset=UTF-8',
+    Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
+  },
+})
+  .then((response: Response) => response.json())
+  .then((data) => console.log(data))
+  .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
