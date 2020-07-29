@@ -45,7 +45,7 @@ fetch(url.href)
   .then((response: Response) => response.json()) // response: Uint8Array
   .then((posts: Array<Post>) => console.log(posts));
 
-// Methods http
+// HTTP - Methods
 // Read more on: https://developer.mozilla.org/es/docs/Web/HTTP/Methods
 
 // POST
