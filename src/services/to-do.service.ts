@@ -1,7 +1,7 @@
 import { HttpClient } from '../utils/http-client';
 import { ApiConfig } from '../config/api-config';
 
-export class TodoService {
+export class ToDoService {
   private http: HttpClient;
   private serviceURL: string = `${ApiConfig.BASE_URL}/todos/`;
 
@@ -9,7 +9,7 @@ export class TodoService {
     this.http = new HttpClient();
   }
 
-  getAll() {
+  getAll(): Promise<Array<Post>> {
     return this.http.get(this.serviceURL);
   }
 
