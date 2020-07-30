@@ -1,5 +1,5 @@
 // TODO: Refactor
-export interface Post {
+interface Post {
   userId: number;
   id?: number;
   title: string;
