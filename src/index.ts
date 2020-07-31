@@ -1,5 +1,3 @@
-import { ToDoService } from './services/to-do.service';
-import { Post } from './models/post';
 import { NavBarComponent } from './components/nav-bar.component';
 import { ToDoComponent } from './components/to-do.component';
 
