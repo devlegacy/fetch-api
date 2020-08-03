@@ -9,8 +9,8 @@ export class ToDoService {
     this.http = new HttpClient();
   }
 
-  getAll(): Promise<Array<Post>> {
-    return this.http.get(this.serviceURL);
+  getAll(limit: number = 20): Promise<Array<Post>> {
+    return this.http.get(`${this.serviceURL}?_limit=${limit}`);
   }
 
   find() {}

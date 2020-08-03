@@ -5,7 +5,7 @@ class App {
   start(): void {
     console.log('>> Start app');
     new NavBarComponent();
-    new ToDoComponent().render();
+    new ToDoComponent({ selector: '#to-do-container' }).render();
   }
 }
 
