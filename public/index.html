@@ -61,17 +61,25 @@
         <p class="panel-heading">
           Create new to do
         </p>
-        <form action="" class="px-4 py-4 is-fullwidth">
+        <form
+          action="https://jsonplaceholder.typicode.com/todos"
+          method="POST"
+          id="frm-create-post"
+          class="px-4 py-4 is-fullwidth"
+        >
           <div class="field">
             <label class="label">New to do:</label>
-            <div class="control is-loading">
+            <div class="control">
               <textarea
+                name="title"
                 class="textarea"
                 placeholder="What needs to be done?"
+                autofocus
+                required
               ></textarea>
             </div>
           </div>
-          <button class="button is-success is-fullwidth">
+          <button type="submit" class="button is-success is-fullwidth">
             Create
           </button>
         </form>

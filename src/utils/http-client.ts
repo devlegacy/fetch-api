@@ -8,7 +8,7 @@ export class HttpClient {
   }
 
   post(url: string, body: object | null = null): Promise<any> {
-    return HttpClient.configureRequest(url, 'POST');
+    return HttpClient.configureRequest(url, 'POST', body);
   }
 
   update(url: string, body: object | null = null): Promise<any> {

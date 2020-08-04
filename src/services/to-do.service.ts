@@ -15,7 +15,9 @@ export class ToDoService {
 
   find() {}
 
-  create() {}
+  create(post: Post) {
+    return this.http.post(`${this.serviceURL}`, post);
+  }
 
   update(post: Post) {
     return this.http.update(`${this.serviceURL}${post.id}`, post);
