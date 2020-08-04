@@ -10,32 +10,18 @@ export class ToDoComponent implements RenderedComponent {
   ) {}
 
   render(): void {
-    let content: string = '';
-    let $element = document.querySelector(this.options.selector);
+    const $element = document.querySelector(this.options.selector);
 
     this.toDoService.getAll().then((posts: Array<Post>) => {
-      // console.log(this.options.selector);
-      // document.getElementById('to-do-container');
       this.posts = posts;
-      this.posts.forEach((post: Post) => {
-        content += `
-                      <div class="column is-12">
-                        <article class="card">
-                          <div class="card-content">
-                            <div class="content">
-                              ${post.title}
-                            </div>
-                          </div>
-                        </article>
-                      </div>
-        `;
-      });
-      $element!.innerHTML = content;
+      $element!.innerHTML = this.template();
+
       $element?.addEventListener('click', (e: Event) => {
         const target = <HTMLElement>e.target;
-        if (target.classList.value.startsWith('content')) {
-          console.log(target);
-          target.addEventListener(
+        console.log(target);
+        if (target.classList.value.includes('content')) {
+          const $todo: HTMLElement | null = target.querySelector('.content');
+          $todo!.addEventListener(
             'blur',
             (e: Event) => {
               console.log(e);
@@ -47,11 +33,29 @@ export class ToDoComponent implements RenderedComponent {
               once: true,
             }
           );
-          target.classList.add('px-4', 'py-4');
-          target.contentEditable = 'true';
-          target.focus();
+          $todo!.classList.add('px-4', 'py-4');
+          $todo!.contentEditable = 'true';
+          $todo!.focus();
         }
       });
     });
+  }
+
+  template(): string {
+    let template: string = '';
+    this.posts.forEach((post: Post) => {
+      template += `
+        <div class="column is-12">
+          <article class="card">
+            <div class="card-content">
+              <div class="content">
+                ${post.title}
+              </div>
+            </div>
+          </article>
+        </div>
+      `;
+    });
+    return template;
   }
 }
