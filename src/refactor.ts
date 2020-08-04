@@ -62,7 +62,7 @@ fetch('https://jsonplaceholder.typicode.com/posts', {
   method: 'POST',
   body: JSON.stringify(post),
   headers: {
-    'Content-type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json; charset=UTF-8',
     Accept: 'application/json; charset=UTF-8',
   },
 })
@@ -106,7 +106,7 @@ fetch('http://localhost:8000/api/', { method: 'PUT' })
 fetch('http://localhost:8000/api/', {
   method: 'PUT',
   headers: {
-    'Content-type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json; charset=UTF-8',
     Accept: 'application/json; charset=UTF-8',
     Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
   },
@@ -120,7 +120,7 @@ document.cookie = 'username=Samuel';
 fetch('http://localhost:8000/api/', {
   method: 'PUT',
   headers: {
-    'Content-type': 'application/json; charset=UTF-8',
+    'Content-Type': 'application/json; charset=UTF-8',
     Accept: 'application/json; charset=UTF-8',
     Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
   },

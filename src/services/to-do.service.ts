@@ -17,7 +17,11 @@ export class ToDoService {
 
   create() {}
 
-  update() {}
+  update(post: Post) {
+    return this.http.update(`${this.serviceURL}${post.id}`, post);
+  }
 
-  destroy() {}
+  destroy(post: Post) {
+    return this.http.destroy(`${this.serviceURL}${post.id}`);
+  }
 }

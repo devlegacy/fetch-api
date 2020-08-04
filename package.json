@@ -7,7 +7,7 @@
     "start": "npm-run-all --parallel watch serve:local serve:api",
     "build": "webpack --config webpack.config.js",
     "watch": "npm run build -- --watch",
-    "serve:local": "http-server ./public -a localhost -p 8080 -e -g -c-1",
+    "serve:local": "http-server ./public -p 8080 -e -g -c-1",
     "serve:api": "node ./server/index.js"
   },
   "keywords": [],

@@ -3,8 +3,16 @@ export class HttpClient {
     return HttpClient.configureRequest(url, 'GET');
   }
 
-  post(url: string, body: object | null): Promise<any> {
+  destroy(url: string): Promise<any> {
+    return HttpClient.configureRequest(url, 'DELETE');
+  }
+
+  post(url: string, body: object | null = null): Promise<any> {
     return HttpClient.configureRequest(url, 'POST');
+  }
+
+  update(url: string, body: object | null = null): Promise<any> {
+    return HttpClient.configureRequest(url, 'PUT', body);
   }
 
   static configureRequest(
@@ -12,6 +20,12 @@ export class HttpClient {
     method: string,
     body: object | null = null
   ): Promise<any> {
-    return fetch(url, { method }).then((response: Response) => response.json());
+    return fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        Accept: 'application/json; charset=UTF-8',
+      },
+    }).then((response: Response) => response.json());
   }
 }
