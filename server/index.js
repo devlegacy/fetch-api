@@ -32,7 +32,7 @@ const api = (req, res) => {
 
 // Node.js server
 app
-  // .use(cors())
+  .use(cors())
   .use(morgan('tiny'))
   .use(cookieParser())
   .get('/', (req, res) => {
