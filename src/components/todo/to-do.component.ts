@@ -11,28 +11,29 @@ export class ToDoComponent implements RenderedComponent {
 
   render(): void {
     const $element = document.querySelector(this.options.selector);
+    if ($element) {
+      this.toDoService.getAll().then((posts: Array<Post>) => {
+        this.posts = posts;
+        $element!.innerHTML = this.template();
 
-    this.toDoService.getAll().then((posts: Array<Post>) => {
-      this.posts = posts;
-      $element!.innerHTML = this.template();
-
-      // Edit text
-      $element?.addEventListener('click', (e: Event) => {
-        const target = <HTMLElement>e.target;
-        if (target.classList.value.includes('content')) {
-          // console.log(target);
-          const $todo: HTMLElement | null =
-            target.querySelector('.content') || target;
-          this.updateToDo($todo);
-        } else if (target.classList.value.startsWith('card-footer-item')) {
-          e.preventDefault();
-          const $todo: HTMLElement = <HTMLElement>(
-            target.closest('article')?.querySelector('.content')
-          );
-          this.deleteToDo($todo);
-        }
+        // Edit text
+        $element?.addEventListener('click', (e: Event) => {
+          const target = <HTMLElement>e.target;
+          if (target.classList.value.includes('content')) {
+            // console.log(target);
+            const $todo: HTMLElement | null =
+              target.querySelector('.content') || target;
+            this.updateToDo($todo);
+          } else if (target.classList.value.startsWith('card-footer-item')) {
+            e.preventDefault();
+            const $todo: HTMLElement = <HTMLElement>(
+              target.closest('article')?.querySelector('.content')
+            );
+            this.deleteToDo($todo);
+          }
+        });
       });
-    });
+    }
   }
 
   template(): string {
