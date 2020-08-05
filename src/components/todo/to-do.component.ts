@@ -1,6 +1,7 @@
 import { ToDoService } from '../../services/to-do.service';
 import { RenderedComponent } from '../../core/components/rendered-component';
 import { ComponentOption } from '../../core/options/component-option';
+import { Post } from '../../models/post';
 
 export class ToDoComponent implements RenderedComponent {
   private posts: Array<Post> = [];

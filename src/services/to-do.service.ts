@@ -1,5 +1,6 @@
 import { HttpClient } from '../utils/http-client';
 import { ApiConfig } from '../config/api-config';
+import { Post } from '../models/post';
 
 export class ToDoService {
   private http: HttpClient;
