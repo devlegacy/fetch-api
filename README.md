@@ -1,5 +1,16 @@
 # Fetch - API 
 
+## Run project
+
+```sh
+  # Install local dependencies
+  npm i && npm audit fix
+  # Run project
+  npm start
+```
+
+## :book: Read about in:
+
 [:link: Fetch API](https://fetch.spec.whatwg.org/#fetch-api)
 [:link: HTTP request methods](https://developer.mozilla.org/es/docs/Web/HTTP/Methods)
 
