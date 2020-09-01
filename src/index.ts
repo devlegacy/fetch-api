@@ -1,4 +1,4 @@
-import { NavBarComponent } from './components/nav-bar.component';
+import { NavBarComponent } from './components/common/nav-bar.component';
 import { ToDoComponent } from './components/todo/to-do.component';
 import { CreateToDoComponent } from './components/todo/create-to-do.component';
 import { UploadComponent } from './components/upload.component';
