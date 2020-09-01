@@ -1,7 +1,7 @@
 import { Post } from '../models/post';
 
 export class PracticeService {
-  firstFetch() {
+  public firstFetch() {
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then((response: Response) => {
         console.log(typeof response);
@@ -10,7 +10,7 @@ export class PracticeService {
       .then((posts: Array<Post>) => console.log(posts));
   }
 
-  firstFetchAsyncAwait() {
+  public firstFetchWithAsyncAwait() {
     (async () => {
       const response: Response = await fetch(
         'https://jsonplaceholder.typicode.com/posts'
@@ -20,7 +20,7 @@ export class PracticeService {
     })();
   }
 
-  handleError() {
+  public handleError() {
     // Handle error
     fetch('https://jsonplaceholder.typicode.com/pos')
       .then((response: Response) => {
@@ -35,7 +35,7 @@ export class PracticeService {
       .catch((err: Error) => console.error('[Fetch error]:', err.message));
   }
 
-  queryParams() {
+  public queryParams() {
     // Query params
     // Read more on: https://fetch.spec.whatwg.org/#fetch-api
     const queryParams = {
@@ -52,7 +52,7 @@ export class PracticeService {
       .then((posts: Array<Post>) => console.log(posts));
   }
 
-  httpMethodPost() {
+  public httpMethodPost() {
     // HTTP - Methods
     // Read more on: https://developer.mozilla.org/es/docs/Web/HTTP/Methods
 
@@ -74,21 +74,21 @@ export class PracticeService {
       .then((post: Post) => console.log(post));
   }
 
-  httpMethodGet() {
+  public httpMethodGet() {
     fetch('http://localhost:8000/api/', { method: 'GET' })
       .then((response: Response) => response.json())
       .then((data) => console.log(data))
       .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
   }
 
-  httpMethodPut() {
+  public httpMethodPut() {
     fetch('http://localhost:8000/api/', { method: 'PUT' })
       .then((response: Response) => response.json())
       .then((data) => console.log(data))
       .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
   }
 
-  httpHeaders() {
+  public httpHeaders() {
     // Headers
     fetch('http://localhost:8000/api/', {
       method: 'PUT',
@@ -103,7 +103,7 @@ export class PracticeService {
       .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
   }
 
-  httpCookies() {
+  public httpCookies() {
     // Cookies
     document.cookie = 'username=Samuel';
     fetch('http://localhost:8000/api/', {
