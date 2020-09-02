@@ -22,7 +22,7 @@ export class UploadComponent
     });
   }
 
-  private handlerUpload(e: Event) {
+  private handlerUpload(e: Event): boolean {
     e.preventDefault();
     const target: HTMLFormElement = <HTMLFormElement>e.target;
     const body = new FormData(target);
