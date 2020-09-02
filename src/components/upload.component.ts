@@ -1,10 +1,16 @@
 import { ComponentOption } from '../core/options/component-option';
+import { BaseComponent } from '../core/components/base-component';
+import { RenderedComponent } from '../core/components/rendered-component';
 
-export class UploadComponent {
-  constructor(private options: ComponentOption) {
-    const $form: HTMLFormElement | null = document.querySelector(
-      this.options.selector
-    );
+export class UploadComponent
+  extends BaseComponent
+  implements RenderedComponent {
+  constructor(options: ComponentOption) {
+    super(options);
+  }
+
+  render(): void {
+    const $form = document.querySelector(this.selector);
 
     const $file = <HTMLInputElement>$form?.querySelector('#file');
     $file?.addEventListener('change', (e: Event) => {

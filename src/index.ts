@@ -6,15 +6,16 @@ import { PracticeComponent } from './components/practice.component';
 
 class App {
   start(): void {
-    console.log('>> Start app');
-    new NavBarComponent();
-    new ToDoComponent({ selector: '#to-do-container' }).render();
-    new CreateToDoComponent({ selector: '#frm-create-post' }).render();
-    new UploadComponent({ selector: '#frm-upload' });
-    new PracticeComponent({ selector: '#practices' });
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('>> Start app');
+      new NavBarComponent({ selector: '.navbar-burger' }).render();
+      new PracticeComponent({ selector: '#practices' }).render();
+      new UploadComponent({ selector: '#frm-upload' }).render();
+
+      new ToDoComponent({ selector: '#to-do-container' }).render();
+      new CreateToDoComponent({ selector: '#frm-create-post' }).render();
+    });
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  new App().start();
-});
+new App().start();

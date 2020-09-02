@@ -12,14 +12,14 @@ export class NavBarComponent
     super(options);
   }
 
-  private findNavElements(): Array<HTMLElement> {
+  private findNavBarElements(): Array<HTMLElement> {
     return Array.prototype.slice.call(
       document.querySelectorAll(this.selector),
       0
     );
   }
 
-  private handlerNavClick($nav: HTMLElement) {
+  private handlerNavBarClick($nav: HTMLElement) {
     $nav.addEventListener('click', () => {
       // Get the target from the "data-target" attribute
       const target = $nav.dataset.target || DEFAULT_TARGET;
@@ -33,12 +33,12 @@ export class NavBarComponent
 
   render(): void {
     // Get all "navbar-burger" elements
-    const $navbarBurger = this.findNavElements();
+    const $navbarBurger = this.findNavBarElements();
 
     // Check if there are any navbar burgers
     // if ($navbarBurgers.length > 0) {
     // Add a click event on each of them
-    $navbarBurger?.forEach(this.handlerNavClick);
+    $navbarBurger?.forEach(this.handlerNavBarClick);
     // }
   }
 }
