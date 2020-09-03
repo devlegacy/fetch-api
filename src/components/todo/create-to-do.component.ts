@@ -2,7 +2,7 @@ import { ComponentOption } from '../../core/options/component-option';
 import { ToDoService } from '../../services/to-do.service';
 import { RenderedComponent } from '../../core/components/rendered-component';
 import { Post } from '../../models/post';
-import { handlerClick } from './to-do-card.component';
+import { handlerTitleClick } from './to-do-card.component';
 
 export class CreateToDoComponent implements RenderedComponent {
   constructor(
@@ -60,7 +60,7 @@ export class CreateToDoComponent implements RenderedComponent {
 
           newPost
             .querySelector<HTMLDivElement>('.card-content')
-            ?.addEventListener('click', handlerClick);
+            ?.addEventListener('click', handlerTitleClick);
 
           $title.closest('.control')?.classList.remove('is-loading');
           $button.classList.add('is-loading');

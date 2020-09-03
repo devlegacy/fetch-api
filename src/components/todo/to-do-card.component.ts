@@ -4,21 +4,35 @@ import { ComponentOption } from '../../core/options/component-option';
 import { Post } from '../../models/post';
 import { BaseComponent } from '../../core/components/base-component';
 
-export function handlerClick(e: MouseEvent) {
-  const $target = <HTMLElement>e.target;
-  const $todo = $target.querySelector<HTMLElement>('.content') || $target;
-  // console.log($todo, $todo.contentEditable);
-  if ($todo.contentEditable === 'true') {
-    return false;
+function getTitle($element: HTMLDivElement) {
+  return $element.querySelector<HTMLDivElement>('.content') || $element;
+}
+
+export function handlerTitleClick(e: MouseEvent) {
+  const $target = <HTMLDivElement>e.target;
+  const $title = getTitle($target);
+  if ($target.classList.contains('card-content')) {
+    console.dir('click', $target);
+    // if ($title.contentEditable === 'true') {
+    //   e.preventDefault();
+    //   $title.focus();
+    // }
   }
-  $todo.contentEditable = 'true';
-  $todo.classList.add('px-4', 'py-4');
-  $todo.focus();
-  $todo.addEventListener('blur', (e) => {
-    console.log(e);
-    $todo.classList.remove('px-4', 'py-4');
-    $todo.contentEditable = 'false';
-  });
+  if ($title.contentEditable === 'true') {
+    return;
+  }
+  $title.contentEditable = 'true';
+  $title.classList.add('px-4', 'py-4');
+  $title.focus();
+}
+
+function handlerTitleBlur(e: FocusEvent) {
+  console.log('blur', e);
+  e.preventDefault();
+  return false;
+  const $title = <HTMLDivElement>e.target;
+  $title.classList.remove('px-4', 'py-4');
+  $title.contentEditable = 'false';
 }
 
 export class ToDoCardComponent
@@ -65,26 +79,31 @@ export class ToDoCardComponent
     return template;
   }
 
-  private handlerToDoCardActions($element: HTMLDivElement): void {
-    const $todoContents = $element.querySelectorAll<HTMLDivElement>(
-      '.card-content'
-    );
-    $todoContents.forEach(($todo: HTMLDivElement) => {
-      $todo.addEventListener('click', handlerClick);
+  private handlerToDoCardActions($todoCards: NodeListOf<HTMLDivElement>): void {
+    $todoCards.forEach(($todoCard: HTMLDivElement) => {
+      const $title = getTitle($todoCard);
+      $todoCard.addEventListener('click', handlerTitleClick);
+      $title.addEventListener('blur', handlerTitleBlur);
     });
   }
 
   render(): void {
-    const $element: HTMLDivElement | null = document.querySelector(
+    const $todoContainer = document.querySelector<HTMLDivElement>(
       this.selector
     );
-    if ($element) {
-      this.toDoService.getAll().then((posts: Array<Post>) => {
-        this.posts = posts;
-        super.render({ data: this.template() });
-        this.handlerToDoCardActions($element);
-      });
+
+    if (!$todoContainer) {
+      return;
     }
+
+    this.toDoService.getAll().then((posts: Array<Post>) => {
+      this.posts = posts;
+      super.render({ data: this.template() });
+      const $todoCards = $todoContainer.querySelectorAll<HTMLDivElement>(
+        '.card-content'
+      );
+      this.handlerToDoCardActions($todoCards);
+    });
   }
 
   // private deleteToDo($todo: HTMLElement) {
