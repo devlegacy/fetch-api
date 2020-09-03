@@ -27,12 +27,14 @@ export function handlerTitleClick(e: MouseEvent) {
 }
 
 function handlerTitleBlur(e: FocusEvent) {
-  console.log('blur', e);
+  console.log('blur', e.target);
+  e.stopImmediatePropagation();
+  e.stopPropagation();
   e.preventDefault();
   return false;
-  const $title = <HTMLDivElement>e.target;
-  $title.classList.remove('px-4', 'py-4');
-  $title.contentEditable = 'false';
+  // const $title = <HTMLDivElement>e.target;
+  // $title.classList.remove('px-4', 'py-4');
+  // $title.contentEditable = 'false';
 }
 
 export class ToDoCardComponent
