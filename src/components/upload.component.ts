@@ -9,9 +9,7 @@ export class UploadComponent
     super(options);
   }
 
-  render(): void {
-    const $form = document.querySelector(this.selector);
-
+  private handlerUploadInputName($form: Element) {
     const $file = <HTMLInputElement>$form?.querySelector('#file');
     $file?.addEventListener('change', (e: Event) => {
       const files = (<HTMLInputElement>e.target).files; // $files.files
@@ -22,28 +20,34 @@ export class UploadComponent
         }
       }
     });
+  }
 
-    $form?.addEventListener('submit', (e: Event) => {
-      e.preventDefault();
-      const target: HTMLFormElement = <HTMLFormElement>e.target;
+  private handlerUpload(e: Event): boolean {
+    e.preventDefault();
+    const target: HTMLFormElement = <HTMLFormElement>e.target;
+    const body = new FormData(target);
+    // const file = (<HTMLInputElement>$form.querySelector('#file')).files;
+    // console.log(file);
+    // if (file) {
+    //   body.append('file', file[0]);
+    // }
 
-      const body = new FormData(target);
-      // const file = (<HTMLInputElement>$form.querySelector('#file')).files;
-      // console.log(file);
-      // if (file) {
-      //   body.append('file', file[0]);
-      // }
+    // TODO: This can be a service
+    fetch(target.action, {
+      method: 'POST',
+      body,
+    })
+      .then((response: Response) => response.text())
+      .then((data: string) => alert(data))
+      .catch((err: Error) =>
+        console.error('[Upload fetch error]:', err.message)
+      );
+    return false;
+  }
 
-      fetch(target.action, {
-        method: 'POST',
-        body,
-      })
-        .then((response: Response) => response.text())
-        .then((data: string) => alert(data))
-        .catch((err: Error) =>
-          console.error('[Upload fetch error]:', err.message)
-        );
-      return false;
-    });
+  public render(): void {
+    const $form = document.querySelector(this.selector);
+    $form && this.handlerUploadInputName($form);
+    $form?.addEventListener('submit', this.handlerUpload);
   }
 }

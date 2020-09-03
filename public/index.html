@@ -64,9 +64,7 @@
 
     <main id="app" class="container mt-6">
       <section class="panel">
-        <p class="panel-heading">
-          Create new to do
-        </p>
+        <p class="panel-heading">Create new to do</p>
         <form
           action="https://jsonplaceholder.typicode.com/todos"
           method="POST"
@@ -86,7 +84,10 @@
             </div>
           </div>
           <button type="submit" class="button is-success is-fullwidth">
-            Create
+            <span class="icon is-small">
+              <i class="fas fa-plus-circle"></i>
+            </span>
+            <span>Create</span>
           </button>
         </form>
       </section>

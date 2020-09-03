@@ -1,5 +1,5 @@
 import { NavBarComponent } from './components/common/nav-bar.component';
-import { ToDoComponent } from './components/todo/to-do.component';
+import { ToDoCardComponent } from './components/todo/to-do-card.component';
 import { CreateToDoComponent } from './components/todo/create-to-do.component';
 import { UploadComponent } from './components/upload.component';
 import { PracticeComponent } from './components/practice.component';
@@ -12,7 +12,7 @@ class App {
       new PracticeComponent({ selector: '#practices' }).render();
       new UploadComponent({ selector: '#frm-upload' }).render();
 
-      new ToDoComponent({ selector: '#to-do-container' }).render();
+      new ToDoCardComponent({ selector: '#to-do-container' }).render();
       new CreateToDoComponent({ selector: '#frm-create-post' }).render();
     });
   }
