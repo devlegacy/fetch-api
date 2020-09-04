@@ -4,19 +4,20 @@ import { ComponentOption } from '../../core/options/component-option';
 import { Post } from '../../models/post';
 import { BaseComponent } from '../../core/components/base-component';
 
-function getTitle($element: HTMLDivElement) {
+function getToDoTitle($element: HTMLDivElement) {
   return $element.querySelector<HTMLDivElement>('.content') || $element;
 }
 
 export function handlerTitleClick(e: MouseEvent) {
   const $target = <HTMLDivElement>e.target;
-  const $title = getTitle($target);
+  const $title = getToDoTitle($target);
   if ($target.classList.contains('card-content')) {
-    console.dir('click', $target);
-    // if ($title.contentEditable === 'true') {
-    //   e.preventDefault();
-    //   $title.focus();
-    // }
+    if ($title.contentEditable === 'true') {
+      e.preventDefault();
+      $title.classList.remove('px-4', 'py-4');
+      $title.contentEditable = 'false';
+      return;
+    }
   }
   if ($title.contentEditable === 'true') {
     return;
@@ -26,15 +27,17 @@ export function handlerTitleClick(e: MouseEvent) {
   $title.focus();
 }
 
-function handlerTitleBlur(e: FocusEvent) {
-  console.log('blur', e.target);
-  e.stopImmediatePropagation();
-  e.stopPropagation();
-  e.preventDefault();
-  return false;
-  // const $title = <HTMLDivElement>e.target;
-  // $title.classList.remove('px-4', 'py-4');
-  // $title.contentEditable = 'false';
+function handlerTitleBlur(e: FocusEvent, toDoService: ToDoService) {
+  const $title = <HTMLDivElement>e.target;
+
+  const post: Post = JSON.parse(<string>$title.dataset.post);
+  post.title = $title.innerText;
+  $title.classList.remove('px-4', 'py-4');
+  toDoService.update(post).then(() => {
+    $title.contentEditable = 'false';
+  });
+
+  return;
 }
 
 export class ToDoCardComponent
@@ -83,9 +86,15 @@ export class ToDoCardComponent
 
   private handlerToDoCardActions($todoCards: NodeListOf<HTMLDivElement>): void {
     $todoCards.forEach(($todoCard: HTMLDivElement) => {
-      const $title = getTitle($todoCard);
+      const $title = getToDoTitle($todoCard);
+      const $btnDelete = $todoCard
+        .closest('.card')
+        ?.querySelector<HTMLButtonElement>('button');
       $todoCard.addEventListener('click', handlerTitleClick);
-      $title.addEventListener('blur', handlerTitleBlur);
+      $title.addEventListener('blur', (e) =>
+        handlerTitleBlur(e, this.toDoService)
+      );
+      $btnDelete!.addEventListener('click', (e) => this.deleteToDo(e));
     });
   }
 
@@ -108,9 +117,16 @@ export class ToDoCardComponent
     });
   }
 
-  // private deleteToDo($todo: HTMLElement) {
-  //   const post: Post = JSON.parse(<string>$todo.dataset.post);
-  //   this.toDoService.destroy(post);
-  //   $todo.closest('div.column')?.remove();
-  // }
+  private deleteToDo(e: MouseEvent) {
+    const $target = <HTMLElement>e.target;
+    const $btn = $target.closest('button');
+    const $todo = $target
+      .closest('article')
+      ?.querySelector<HTMLDivElement>('.content') as HTMLDivElement;
+    const post: Post = JSON.parse(<string>$todo.dataset.post);
+    $btn!.disabled = true;
+    this.toDoService.destroy(post).then(() => {
+      $todo.closest('div.column')?.remove();
+    });
+  }
 }
