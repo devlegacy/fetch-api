@@ -4,42 +4,6 @@ import { ComponentOption } from '../../core/options/component-option';
 import { Post } from '../../models/post';
 import { BaseComponent } from '../../core/components/base-component';
 
-function getToDoTitle($element: HTMLDivElement) {
-  return $element.querySelector<HTMLDivElement>('.content') || $element;
-}
-
-export function handlerTitleClick(e: MouseEvent) {
-  const $target = <HTMLDivElement>e.target;
-  const $title = getToDoTitle($target);
-  if ($target.classList.contains('card-content')) {
-    if ($title.contentEditable === 'true') {
-      e.preventDefault();
-      $title.classList.remove('px-4', 'py-4');
-      $title.contentEditable = 'false';
-      return;
-    }
-  }
-  if ($title.contentEditable === 'true') {
-    return;
-  }
-  $title.contentEditable = 'true';
-  $title.classList.add('px-4', 'py-4');
-  $title.focus();
-}
-
-function handlerTitleBlur(e: FocusEvent, toDoService: ToDoService) {
-  const $title = <HTMLDivElement>e.target;
-
-  const post: Post = JSON.parse(<string>$title.dataset.post);
-  post.title = $title.innerText;
-  $title.classList.remove('px-4', 'py-4');
-  toDoService.update(post).then(() => {
-    $title.contentEditable = 'false';
-  });
-
-  return;
-}
-
 export class ToDoCardComponent
   extends BaseComponent
   implements RenderedComponent {
@@ -84,21 +48,69 @@ export class ToDoCardComponent
     return template;
   }
 
+  private getToDoTitle($element: HTMLDivElement): HTMLDivElement {
+    return $element.querySelector<HTMLDivElement>('.content') || $element;
+  }
+
+  private handlerTitleClick(e: MouseEvent) {
+    const $target = <HTMLDivElement>e.target;
+    const $title = this.getToDoTitle($target);
+    if ($target.classList.contains('card-content')) {
+      if ($title.contentEditable === 'true') {
+        e.preventDefault();
+        $title.classList.remove('px-4', 'py-4');
+        $title.contentEditable = 'false';
+        return;
+      }
+    }
+    if ($title.contentEditable === 'true') {
+      return;
+    }
+    $title.contentEditable = 'true';
+    $title.classList.add('px-4', 'py-4');
+    $title.focus();
+  }
+
+  private handlerTitleBlur(e: FocusEvent) {
+    const $title = <HTMLDivElement>e.target;
+    const $todoCard = $title.closest('.card-content');
+
+    const post: Post = JSON.parse(<string>$title.dataset.post);
+    post.title = $title.innerText;
+
+    $todoCard?.classList.add('has-background-warning');
+    $title.classList.remove('px-4', 'py-4');
+    $title.contentEditable = 'false';
+    this.toDoService.update(post).then(() => {
+      $todoCard?.addEventListener(
+        'click',
+        (e: any) => this.handlerTitleClick(e),
+        {
+          once: true,
+        }
+      );
+      $todoCard?.classList.remove('has-background-warning');
+    });
+
+    return;
+  }
+
   private handlerToDoCardActions($todoCards: NodeListOf<HTMLDivElement>): void {
     $todoCards.forEach(($todoCard: HTMLDivElement) => {
-      const $title = getToDoTitle($todoCard);
+      const $title = this.getToDoTitle($todoCard);
       const $btnDelete = $todoCard
         .closest('.card')
         ?.querySelector<HTMLButtonElement>('button');
-      $todoCard.addEventListener('click', handlerTitleClick);
-      $title.addEventListener('blur', (e) =>
-        handlerTitleBlur(e, this.toDoService)
-      );
+
+      $todoCard.addEventListener('click', (e) => this.handlerTitleClick(e), {
+        once: true,
+      });
+      $title.addEventListener('blur', (e) => this.handlerTitleBlur(e));
       $btnDelete!.addEventListener('click', (e) => this.deleteToDo(e));
     });
   }
 
-  render(): void {
+  public render(): void {
     const $todoContainer = document.querySelector<HTMLDivElement>(
       this.selector
     );

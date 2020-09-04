@@ -2,7 +2,6 @@ import { ComponentOption } from '../../core/options/component-option';
 import { ToDoService } from '../../services/to-do.service';
 import { RenderedComponent } from '../../core/components/rendered-component';
 import { Post } from '../../models/post';
-import { handlerTitleClick } from './to-do-card.component';
 
 export class CreateToDoComponent implements RenderedComponent {
   constructor(
@@ -58,15 +57,15 @@ export class CreateToDoComponent implements RenderedComponent {
           newPost.innerHTML = template;
           document.querySelector('#to-do-container')?.prepend(newPost);
 
-          newPost
-            .querySelector<HTMLDivElement>('.card-content')
-            ?.addEventListener('click', handlerTitleClick);
+          // newPost
+          //   .querySelector<HTMLDivElement>('.card-content')
+          //   ?.addEventListener('click', handlerTitleClick);
 
-          $title.closest('.control')?.classList.remove('is-loading');
-          $button.classList.add('is-loading');
-          $button.disabled = false;
-          $title.value = '';
-          $button.classList.remove('is-loading');
+          // $title.closest('.control')?.classList.remove('is-loading');
+          // $button.classList.add('is-loading');
+          // $button.disabled = false;
+          // $title.value = '';
+          // $button.classList.remove('is-loading');
         });
         return false;
       });
