@@ -21,8 +21,13 @@
 ### :whale2: With docker
 
 ```sh
-  # Run
+  # Up app
   docker-compose up -d
+```
+
+```sh
+  # Down app
+  docker-compose down
 ```
 
 ### :link: Endpoints

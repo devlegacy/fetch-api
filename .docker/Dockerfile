@@ -1,19 +1,14 @@
-FROM node:lts
+FROM node:lts-alpine
 
 LABEL maintainer="devlegacy.mx@gmail.com"
 
 ENV CONTAINER_PATH /usr/src/app/
 
-COPY package*.json $CONTAINER_PATH
+RUN apk update && apk add --no-cache curl vim wget bash
 
 WORKDIR $CONTAINER_PATH
 
-RUN apt-get update -y --fix-missing && \
-    apt-get upgrade -y && \
-    apt-get dist-upgrade -y && \
-    apt-get autoremove -y && \
-    apt-get clean && \
-    rm -Rf  /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY package*.json $CONTAINER_PATH
 
 RUN npm install && npm audit fix
 
