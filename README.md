@@ -33,7 +33,7 @@
 
 ## :file_folder: Project info
 
-+&nbsp;:open_file_folder: `api-fetch`
++&nbsp;:open_file_folder: `api-fetch`  
 &nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `public` Production files  
 &nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `server` Node API server / Upload files  
 &nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `uploads` Distribution folder for images uploaded  
