@@ -95,6 +95,19 @@ export class ToDoCardComponent
     return;
   }
 
+  private handlerDeleteToDo(e: MouseEvent) {
+    const $target = <HTMLElement>e.target;
+    const $btn = $target.closest('button');
+    const $todo = $target
+      .closest('article')
+      ?.querySelector<HTMLDivElement>('.content') as HTMLDivElement;
+    const post: Post = JSON.parse(<string>$todo.dataset.post);
+    $btn!.disabled = true;
+    this.toDoService.destroy(post).then(() => {
+      $todo.closest('div.column')?.remove();
+    });
+  }
+
   private handlerToDoCardActions($todoCards: NodeListOf<HTMLDivElement>): void {
     $todoCards.forEach(($todoCard: HTMLDivElement) => {
       const $title = this.getToDoTitle($todoCard);
@@ -106,7 +119,7 @@ export class ToDoCardComponent
         once: true,
       });
       $title.addEventListener('blur', (e) => this.handlerTitleBlur(e));
-      $btnDelete!.addEventListener('click', (e) => this.deleteToDo(e));
+      $btnDelete!.addEventListener('click', (e) => this.handlerDeleteToDo(e));
     });
   }
 
@@ -126,19 +139,6 @@ export class ToDoCardComponent
         '.card-content'
       );
       this.handlerToDoCardActions($todoCards);
-    });
-  }
-
-  private deleteToDo(e: MouseEvent) {
-    const $target = <HTMLElement>e.target;
-    const $btn = $target.closest('button');
-    const $todo = $target
-      .closest('article')
-      ?.querySelector<HTMLDivElement>('.content') as HTMLDivElement;
-    const post: Post = JSON.parse(<string>$todo.dataset.post);
-    $btn!.disabled = true;
-    this.toDoService.destroy(post).then(() => {
-      $todo.closest('div.column')?.remove();
     });
   }
 }
