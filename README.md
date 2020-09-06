@@ -9,6 +9,8 @@
 
 ## :rocket: How to use
 
+### :computer: With local node
+
 ```sh
   # Install local dependencies
   npm install && npm audit fix
@@ -16,7 +18,28 @@
   npm start
 ```
 
-## :book: Read about in:
+### :whale2: With docker
+
+```sh
+  # Run
+  docker-compose up -d
+```
+
+### :link: Endpoints
+
+:link: [http://localhost:8080/](http://localhost:8080/)  
+:link: [http://localhost:8000/](http://localhost:8000/)  
+:link: [http://localhost:8000/api/](http://localhost:8000/api/)  
+
+## :file_folder: Project info
+
++&nbsp;:open_file_folder: `api-fetch`
+&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `public` Production files  
+&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `server` Node API server / Upload files  
+&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `uploads` Distribution folder for images uploaded  
+&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `src` Development source files  
+
+## :book: Read about API fetch in:
 
 [:link: Fetch API](https://fetch.spec.whatwg.org/#fetch-api)  
 [:link: HTTP request methods](https://developer.mozilla.org/es/docs/Web/HTTP/Methods)  
