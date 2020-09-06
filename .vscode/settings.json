@@ -50,7 +50,7 @@
     "artisan": true,
     "server.php": true,
     "*.example": true,
-    "*.yml": true,
+    // "*.yml": true,
     // "*.xml": true,
     "*lock*": true, // For package-lock.json, composer.lock
 
