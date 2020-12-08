@@ -1,6 +1,6 @@
 module.exports = () => ({
   devtool: 'inline-source-map',
   output: {
-    filename: '[name].[ext]',
+    filename: '[name].js',
   },
 });

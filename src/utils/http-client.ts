@@ -1,32 +1,40 @@
+enum HttpMethod {
+  GET = 'GET',
+  POST = 'POST',
+  DELETE = 'DELETE',
+  PUT = 'PUT',
+}
+
 export class HttpClient {
   get(url: string): Promise<any> {
-    return HttpClient.configureRequest(url, 'GET');
+    return HttpClient.configureRequest(url, HttpMethod.GET);
   }
 
   destroy(url: string): Promise<any> {
-    return HttpClient.configureRequest(url, 'DELETE');
+    return HttpClient.configureRequest(url, HttpMethod.DELETE);
   }
 
   post(url: string, body: object): Promise<any> {
-    return HttpClient.configureRequest(url, 'POST', body);
+    return HttpClient.configureRequest(url, HttpMethod.POST, body);
   }
 
   update(url: string, body: object): Promise<any> {
-    return HttpClient.configureRequest(url, 'PUT', body);
+    return HttpClient.configureRequest(url, HttpMethod.PUT, body);
   }
 
-  static configureRequest(
+  static async configureRequest(
     url: string,
     method: string,
     body?: object
   ): Promise<any> {
-    return fetch(url, {
+    const response = await fetch(url, {
       method,
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         Accept: 'application/json; charset=UTF-8',
       },
-    }).then((response: Response) => response.json());
+    });
+    return await response.json();
   }
 }

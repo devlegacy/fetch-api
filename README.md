@@ -44,7 +44,9 @@
 &nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `uploads` Distribution folder for images uploaded  
 &nbsp;|&nbsp;&nbsp;+-- :open_file_folder: `src` Development source files  
 
-## :book: Read about API fetch in:
+## :book: Read about 
+
+### API fetch in:
 
 [:link: Fetch API](https://fetch.spec.whatwg.org/#fetch-api)  
 [:link: HTTP request methods](https://developer.mozilla.org/es/docs/Web/HTTP/Methods)  
@@ -61,3 +63,9 @@
 [:link: Access-Control-Allow-Credentials](https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials)  
 
 [:link: Cookies - Credentials](https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials)  
+
+### TypeScript notes
+
+- [Optional chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining)
+- [Non null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)
+- [Differences in optional chaining and non null assertion](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#parsing-differences-in-optional-chaining-and-non-null-assertions)
