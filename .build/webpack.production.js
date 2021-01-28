@@ -45,7 +45,7 @@ const manifest = {
     },
   ],
   // https://github.com/w3c/manifest/wiki/Categories
-  categories,
+  categories: JSON.parse(categories),
   // https://www.w3.org/TR/appmanifest/#screenshots-member
   screenshots: [
     {
@@ -63,17 +63,42 @@ const manifest = {
   // https://www.w3.org/TR/appmanifest/#shortcuts-member
   shortcuts: [
     {
-      name: "Today's agenda",
-      url: '/today',
-      description: 'List of events planned for today',
+      name: 'What needs to be done? | To Do | App',
+      url: '/',
+      description:
+        'List of events planned for today. What needs to be done? | To Do | App',
+      icons: [
+        {
+          src: '/android-chrome-96x96.png',
+          type: 'image/jpeg',
+          purpose: 'any',
+          sizes: '96x96',
+        },
+      ],
     },
     {
-      name: 'New event',
-      url: '/create/event',
+      name: 'Practice | Fetch',
+      url: '/practices',
+      icons: [
+        {
+          src: '/android-chrome-96x96.png',
+          type: 'image/jpeg',
+          purpose: 'any',
+          sizes: '96x96',
+        },
+      ],
     },
     {
-      name: 'New reminder',
-      url: '/create/reminder',
+      name: 'Practice | Upload',
+      url: '/upload',
+      icons: [
+        {
+          src: '/android-chrome-96x96.png',
+          type: 'image/jpeg',
+          purpose: 'any',
+          sizes: '96x96',
+        },
+      ],
     },
   ],
   // DEPRECATED!

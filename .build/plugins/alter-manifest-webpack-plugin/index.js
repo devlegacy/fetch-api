@@ -32,9 +32,9 @@ class AlterManifestWebpackPlugin {
                       ? `<meta name="msapplication-TileColor" content="${this.manifest.theme_color}">`
                       : html;
                   // Alter manifest, from manifest.json to manifest.webmanifest, according to example in: https://www.w3.org/TR/appmanifest/#using-a-link-element-to-link-to-a-manifest
-                  html = /(rel\=.{1}manifest.{1}.*)/.test(html)
-                    ? html.replace('manifest.json', 'manifest.webmanifest')
-                    : html;
+                  // html = /(rel\=.{1}manifest.{1}.*)/.test(html)
+                  //   ? html.replace('manifest.json', 'manifest.webmanifest')
+                  //   : html;
                   return html;
                 })
                 .reduce((prev, next) => {

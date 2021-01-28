@@ -10,7 +10,7 @@
     "serve:local": "http-server ./public -p 8080 -e -g -c-1",
     "serve:api": "node ./server/index.js",
     "package:update": "ncu -u && npm i -D favicons-webpack-plugin@next html-webpack-plugin@next && npm i && npm audit fix --force",
-    "clean": "rm -Rf ./public/js/*.js ./public/*.png ./public/*.xml ./public/*.json ./public/*.webapp ./public/*.ico ./public/*.svg"
+    "clean": "rm -Rf ./public/js ./public/practices ./public/upload ./public/*.html ./public/*.js ./public/*.png ./public/*.xml ./public/*.json ./public/*.webapp ./public/*.ico ./public/*.svg"
   },
   "keywords": [],
   "author": "Samuel R. <samuel@devexteam.com> (https://devexteam.com)",
