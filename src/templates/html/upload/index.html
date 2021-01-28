@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="nositelinkssearchbox" />
+    <meta name="google" content="notranslate" />
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <link rel="preconnect" href="https://jsonplaceholder.typicode.com" />
+    <link rel="dns-prefetch" href="https://jsonplaceholder.typicode.com" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <span class="has-text-link is-size-3">&#128640;</span>
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href="/" class="button is-primary">
+                <strong>Home - To Do</strong>
+              </a>
+              <a href="/upload" class="button is-primary">
+                <strong>Practice - Upload</strong>
+              </a>
+              <a href="/practices" class="button is-primary">
+                <strong>Practice - Fetch</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main id="app" class="container mt-6">
+      <section class="panel">
+        <p class="panel-heading">Upload files</p>
+        <form
+          id="frm-upload"
+          class="px-4 py-4 is-fullwidth"
+          action="http://localhost:8000/api/upload/"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <!-- <label for="file">Search file: </label>
+          <input type="file" name="file" id="file" accept="image/*" required /> -->
+          <div class="field">
+            <div class="file has-name">
+              <label class="file-label">
+                <input
+                  class="file-input"
+                  type="file"
+                  name="file"
+                  id="file"
+                  accept="image/*"
+                  required
+                />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fas fa-upload"></i>
+                  </span>
+                  <span class="file-label"> Choose a file… </span>
+                </span>
+                <span class="file-name">Select file</span>
+              </label>
+            </div>
+          </div>
+          <button class="button is-success is-fullwidth" type="submit">
+            Send file
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
