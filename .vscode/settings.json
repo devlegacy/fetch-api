@@ -33,7 +33,7 @@
     "nbproject": true,
 
     // NodeJS
-    "**/node_modules/": true,
+    // "**/node_modules/": true,
 
     // Angular
     "**/e2e/": true,
