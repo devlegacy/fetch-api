@@ -55,9 +55,10 @@ const manifest = {
       sizes: '752x1233',
       type: 'image/png',
     },
+    // less than twice height
     {
       src: 'screenshots/mobile-screenshot.jpg',
-      sizes: '1080x2340',
+      sizes: '1080x2108',
       type: 'image/jpg',
     },
     {
