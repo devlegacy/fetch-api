@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel watch serve:local serve:api",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --env presets=typescript",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --env presets=typescript && netlify-lambda build server",
     "watch": "cross-env NODE_ENV=development npm run build -- --watch --mode=development ",
     "serve:local": "http-server ./public -p 8080 -e -g -c-1",
     "serve:api": "node ./server/index.js",
@@ -55,6 +55,7 @@
     "mime-types": "^2.1.29",
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
+    "netlify-lambda": "^2.0.3",
     "normalize.css": "^8.0.1",
     "serverless-http": "^2.7.0"
   }
