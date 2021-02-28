@@ -3,6 +3,7 @@ const { cwd } = require('process');
 const AlterManifestWebpackPlugin = require('./plugins/alter-manifest-webpack-plugin/');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 const {
   APP_LANG: lang,
   APP_DIR: dir,
@@ -53,6 +54,11 @@ const manifest = {
       src: 'screenshots/mobile-fetch-api-screenshot.png',
       sizes: '752x1233',
       type: 'image/png',
+    },
+    {
+      src: 'screenshots/mobile-screenshot.jpg',
+      sizes: '1080x2340',
+      type: 'image/jpg',
     },
     {
       src: 'screenshots/desktop-fetch-api-screenshot.png',
