@@ -2,6 +2,7 @@ const { resolve } = require('path');
 const { cwd } = require('process');
 const AlterManifestWebpackPlugin = require('./plugins/alter-manifest-webpack-plugin/');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const {
   APP_LANG: lang,
   APP_DIR: dir,
@@ -110,8 +111,13 @@ const manifest = {
   // },
 };
 module.exports = () => ({
+  optimization: {
+    minimize: true,
+    minimizer: [`...`, new CssMinimizerPlugin()],
+  },
   output: {
     filename: '[name].[fullhash:3].js',
+    publicPath: '/',
   },
   plugins: [
     // https://www.w3.org/TR/appmanifest/
