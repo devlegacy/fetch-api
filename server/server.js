@@ -35,7 +35,7 @@ const api = (req, res) => {
 };
 
 const BASE_URL =
-  process.env.NODE_ENV !== 'production' ? '' : '/.netlify/functions';
+  process.env.NODE_ENV !== 'production' ? '' : '/.netlify/functions/server';
 
 // Node.js server
 app
