@@ -31,9 +31,13 @@ export class UploadComponent
     // if (file) {
     //   body.append('file', file[0]);
     // }
-
+    // http://localhost:8000
+    // https://jsfetchapi.netlify.app/.netlify/functions/server/
     // TODO: This can be a service
-    fetch(target.action, {
+    const api = document.location.href.includes('jsfetchapi.netlify.app')
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/${target.action}`
+      : `http://localhost:8000${target.action}`;
+    fetch(api, {
       method: 'POST',
       body,
     })

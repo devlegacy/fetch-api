@@ -11,15 +11,6 @@
 
     <link rel="preconnect" href="https://jsonplaceholder.typicode.com" />
     <link rel="dns-prefetch" href="https://jsonplaceholder.typicode.com" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
-    />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
@@ -66,7 +57,7 @@
         <form
           id="frm-upload"
           class="px-4 py-4 is-fullwidth"
-          action="http://localhost:8000/api/upload/"
+          action="/api/upload/"
           method="post"
           enctype="multipart/form-data"
         >
