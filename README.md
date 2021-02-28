@@ -2,6 +2,12 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/229100bd-06d6-4223-bd26-7069772d4837/deploy-status)](https://app.netlify.com/sites/jsfetchapi/deploys)
 
+## :earth_americas: Deploy / Demo
+
+- [:globe_with_meridians: :desktop_computer: Backend](https://jsfetchapi.netlify.app/.netlify/functions/server/)
+- [:globe_with_meridians: :cloud: Backend / API](https://jsfetchapi.netlify.app/.netlify/functions/server/api/)
+- [:globe_with_meridians: :computer: Frontend](https://jsfetchapi.netlify.app/)
+
 ## :package: How to install
 
 ```sh
