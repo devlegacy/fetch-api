@@ -32,25 +32,28 @@ const api = (req, res) => {
   });
 };
 
+const BASE_URL =
+  process.env.NODE_ENV !== 'production' ? '' : '/.netlify/functions';
+
 // Node.js server
 app
   .use(cors())
   .use(morgan('tiny'))
   .use(cookieParser())
-  .get('/', (req, res) => {
+  .get(`${BASE_URL}/`, (req, res) => {
     res.send('Hello node');
   })
-  .options('/api/', (req, res) => {
+  .options(`${BASE_URL}/api/`, (req, res) => {
     res.header('Access-Control-Allow-Origin', 'http://localhost:8080'); // | To receive cookies it cannot be a wildcard
     res.header('Access-Control-Allow-Methods', 'PUT');
     res.header('Access-Control-Allow-Headers', 'Content-type, Authentication');
     res.header('Access-Control-Allow-Credentials', 'true');
     res.status(204).send();
   })
-  .get('/api/', api)
-  .post('/api/', api)
-  .put('/api/', api)
-  .post('/api/upload', uploadConfig.single('file'), (req, res) => {
+  .get(`${BASE_URL}/api/`, api)
+  .post(`${BASE_URL}/api/`, api)
+  .put(`${BASE_URL}/api/`, api)
+  .post(`${BASE_URL}/api/upload`, uploadConfig.single('file'), (req, res) => {
     res.send('Upload success');
   });
 
@@ -62,5 +65,6 @@ if (process.env.NODE_ENV !== 'production') {
     );
   });
 } else {
+  module.exports = app;
   module.exports.handler = serverless(app);
 }
