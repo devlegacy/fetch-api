@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const CopyPlugin = require('copy-webpack-plugin');
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
 
 module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
@@ -111,7 +111,6 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
           chunkFilename: '[id].css',
           ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
-
         new HtmlWebpackPlugin({
           title: 'What needs to be done? | To Do | App',
           filename: 'index.html',
@@ -126,6 +125,11 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
           title: 'Practice | Upload',
           filename: 'upload/index.html',
           template: './src/templates/html/upload/index.html',
+        }),
+        new CopyPlugin({
+          patterns: [
+            { from: './src/assets/img/screenshots', to: 'screenshots' },
+          ],
         }),
       ],
     },

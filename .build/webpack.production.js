@@ -28,36 +28,36 @@ const manifest = {
   theme_color,
   // https://www.w3.org/TR/appmanifest/#related_applications-member
   related_applications: [
-    {
-      platform: 'play',
-      url: 'https://play.google.com/store/apps/details?id=com.example.app1',
-      id: 'com.example.app1',
-      min_version: '2',
-      fingerprints: [
-        {
-          type: 'sha256_cert',
-          value: '92:5A:39:05:C5:B9:EA:BC:71:48:5F:F2',
-        },
-      ],
-    },
-    {
-      platform: 'itunes',
-      url: 'https://itunes.apple.com/app/example-app1/id123456789',
-    },
+    // {
+    //   platform: 'play',
+    //   url: 'https://play.google.com/store/apps/details?id=com.example.app1',
+    //   id: 'com.example.app1',
+    //   min_version: '2',
+    //   fingerprints: [
+    //     {
+    //       type: 'sha256_cert',
+    //       value: '92:5A:39:05:C5:B9:EA:BC:71:48:5F:F2',
+    //     },
+    //   ],
+    // },
+    // {
+    //   platform: 'itunes',
+    //   url: 'https://itunes.apple.com/app/example-app1/id123456789',
+    // },
   ],
   // https://github.com/w3c/manifest/wiki/Categories
   categories: JSON.parse(categories),
   // https://www.w3.org/TR/appmanifest/#screenshots-member
   screenshots: [
     {
-      src: 'screenshots/in-game-1x.jpg',
-      sizes: '640x480',
-      type: 'image/jpeg',
+      src: 'screenshots/mobile-fetch-api-screenshot.png',
+      sizes: '752x1233',
+      type: 'image/png',
     },
     {
-      src: 'screenshots/in-game-2x.jpg',
-      sizes: '1280x920',
-      type: 'image/jpeg',
+      src: 'screenshots/desktop-fetch-api-screenshot.png',
+      sizes: '1919x1089',
+      type: 'image/png',
     },
   ],
   // https://developer.mozilla.org/en-US/docs/Web/Manifest/shortcuts
