@@ -1,4 +1,6 @@
 const express = require('express');
+const serverless = require('serverless-http');
+
 const app = express();
 const multer = require('multer');
 const mimeTypes = require('mime-types');
@@ -52,6 +54,12 @@ app
     res.send('Upload success');
   });
 
-app.listen(process.env.PORT || 8000, () => {
-  console.log('[Server - Node.js]:', 'Server running on http://localhost:8000');
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(process.env.PORT || 8000, () => {
+    console.log(
+      '[Server - Node.js]:',
+      'Server running on http://localhost:8000'
+    );
+  });
+}
+module.exports.handler = serverless(app);

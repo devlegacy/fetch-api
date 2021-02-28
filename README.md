@@ -1,5 +1,7 @@
 # Fetch - API 
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/229100bd-06d6-4223-bd26-7069772d4837/deploy-status)](https://app.netlify.com/sites/jsfetchapi/deploys)
+
 ## :package: How to install
 
 ```sh
