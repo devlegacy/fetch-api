@@ -61,5 +61,6 @@ if (process.env.NODE_ENV !== 'production') {
       'Server running on http://localhost:8000'
     );
   });
+} else {
+  module.exports.handler = serverless(app);
 }
-module.exports.handler = serverless(app);
