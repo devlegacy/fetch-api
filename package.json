@@ -8,7 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --env presets=typescript && netlify-lambda build server",
     "watch": "cross-env NODE_ENV=development npm run build -- --watch --mode=development ",
     "serve:local": "http-server ./public -p 8080 -e -g -c-1",
-    "serve:api": "node ./server/index.js",
+    "serve:api": "node ./server/server.js",
     "serve:local:api": "npm-run-all --parallel serve:local serve:api",
     "package:update": "ncu -u && npm i && npm audit fix --force",
     "clean": "rm -Rf ./public/css ./public/js ./public/practices ./public/upload ./public/*.html ./public/*.js ./public/*.png ./public/*.xml ./public/*.json ./public/*.webapp ./public/*.ico ./public/*.svg"
