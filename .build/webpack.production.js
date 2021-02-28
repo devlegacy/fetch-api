@@ -21,7 +21,7 @@ const {
   // APP_SERVICE_WORKER_SRC: src,
   // APP_SERVICE_WORKER_UPDATE_VIA_CACHE: update_via_cache,
   APP_RELATED_APPLICATIONS: string_related_applications,
-} = require('dotenv').config().parsed;
+} = require('dotenv').config().parsed || process.env;
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const manifest = {
   background,
