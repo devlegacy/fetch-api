@@ -35,8 +35,14 @@ export class UploadComponent
     // https://jsfetchapi.netlify.app/.netlify/functions/server/
     // TODO: This can be a service
     const api = document.location.href.includes('jsfetchapi.netlify.app')
-      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/${target.action}`
-      : `http://localhost:8000${target.action}`;
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/${target.action.replace(
+          'https://jsfetchapi.netlify.app/upload/',
+          ''
+        )}`
+      : `http://localhost:8000${target.action.replace(
+          'http://localhost:8000/upload/',
+          ''
+        )}`;
     fetch(api, {
       method: 'POST',
       body,
