@@ -75,22 +75,31 @@ export class PracticeService {
   }
 
   public httpMethodGet() {
-    fetch('http://localhost:8000/api/', { method: 'GET' })
+    const api = document.location.href.includes('jsfetchapi.netlify.app')
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/api/`
+      : `http://localhost:8000/api/`;
+    fetch(api, { method: 'GET' })
       .then((response: Response) => response.json())
       .then((data) => console.log(data))
       .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
   }
 
   public httpMethodPut() {
-    fetch('http://localhost:8000/api/', { method: 'PUT' })
+    const api = document.location.href.includes('jsfetchapi.netlify.app')
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/api/`
+      : `http://localhost:8000/api/`;
+    fetch(api, { method: 'PUT' })
       .then((response: Response) => response.json())
       .then((data) => console.log(data))
       .catch((err: Error) => console.error('[Cors fetch error]:', err.message));
   }
 
   public httpHeaders() {
+    const api = document.location.href.includes('jsfetchapi.netlify.app')
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/api/`
+      : `http://localhost:8000/api/`;
     // Headers
-    fetch('http://localhost:8000/api/', {
+    fetch(api, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -104,9 +113,12 @@ export class PracticeService {
   }
 
   public httpCookies() {
+    const api = document.location.href.includes('jsfetchapi.netlify.app')
+      ? `https://jsfetchapi.netlify.app/.netlify/functions/server/api/`
+      : `http://localhost:8000/api/`;
     // Cookies
     document.cookie = 'username=Samuel';
-    fetch('http://localhost:8000/api/', {
+    fetch(api, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
