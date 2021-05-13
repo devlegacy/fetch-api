@@ -62,6 +62,14 @@
 
 [:link: Cors](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)  
 
+El Intercambio de Recursos de Origen Cruzado (Cross-Origin Resource Sharing) es un mecanismo que agrega unos encabezados (Headers) adicionales HTTP para permitir que un user agent (generalmente un navegador) obtenga permisos para acceder a los recursos de un servidor en un origin distinto (dominio) del que pertenece.
+
+Por ejemplo una solicitud de origen cruzado seria hacer una petición AJAX desde una aplicación que se encuentra en https://dominio-a.com para cargar el recurso https://api.dominio-b.com/data.json.
+
+Por razones de seguridad, los navegadores restringen las solicitudes HTTP de origen cruzado iniciadas dentro de un script.
+
+Si necesitamos permitir request desde un dominio diferente al del servidor podemos usar el middleware cors para permitirlo, pero es importante no dejarlo expuesto a todos los dominios.
+
 [:link: Access-Control-Allow-Origin](http://developer.mozilla.org/es/docs/Web/HTTP/Headers/Access-Control-Allow-Origin)  
 [:link: Access-Control-Allow-Methods](https://developer.mozilla.org/es/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)  
 [:link: Access-Control-Allow-Headers](https://developer.cdn.mozilla.net/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers)  
