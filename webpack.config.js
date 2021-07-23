@@ -85,7 +85,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
                 options: {
                   implementation: require('sass'),
                   sassOptions: {
-                    fiber: require('fibers'),
+                    fiber: false,
                   },
                 },
               },

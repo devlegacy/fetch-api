@@ -130,7 +130,7 @@ module.exports = () => ({
     // https://www.w3.org/TR/appmanifest/
     new FaviconsWebpackPlugin({
       logo: resolve(cwd(), './src/favicon.svg'),
-      cache: true,
+      // cache: true,
       publicPath: '/',
       outputPath: './',
       prefix: '',
