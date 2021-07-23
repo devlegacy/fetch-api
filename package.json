@@ -12,13 +12,13 @@
     "serve:api": "node ./server/server.js",
     "serve:local:api": "npm-run-all --parallel serve:local serve:api",
     "package:update": "ncu -u && npm i --legacy-peer-deps && npm audit fix --legacy-peer-deps",
-    "clean": "rm -Rf ./public/**/*; exit 0"
+    "clean": "rm -Rf ./public/** ; exit 0"
   },
   "keywords": [],
   "author": "Samuel R. <samuel@devexteam.com> (https://devexteam.com)",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^16.3.3",
+    "@types/node": "^16.4.1",
     "autoprefixer": "^10.3.1",
     "copy-webpack-plugin": "^9.0.1",
     "cross-env": "^7.0.3",
@@ -26,7 +26,6 @@
     "css-minimizer-webpack-plugin": "^3.0.2",
     "favicons": "^6.2.2",
     "favicons-webpack-plugin": "^5.0.2",
-    "fibers": "^5.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.2",
     "http-server": "^0.12.3",
@@ -40,7 +39,7 @@
     "ts-loader": "^9.2.3",
     "typescript": "^4.3.5",
     "url-loader": "^4.1.1",
-    "webpack": "^5.45.1",
+    "webpack": "^5.46.0",
     "webpack-cli": "^4.7.2",
     "webpack-merge": "^5.8.0",
     "workbox-precaching": "^6.1.5",
