@@ -66,8 +66,8 @@ export class PracticeService {
       method: 'POST',
       body: JSON.stringify(post),
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        Accept: 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=utf-8',
+        Accept: 'application/json; charset=utf-8',
       },
     })
       .then((response: Response) => response.json()) // response: Uint8Array
@@ -102,8 +102,8 @@ export class PracticeService {
     fetch(api, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        Accept: 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=utf-8',
+        Accept: 'application/json; charset=utf-8',
         Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
       },
     })
@@ -121,8 +121,8 @@ export class PracticeService {
     fetch(api, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        Accept: 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json; charset=utf-8',
+        Accept: 'application/json; charset=utf-8',
         Authentication: 'Bearer: xxxxxxxyyyyxxxxyyy',
       },
       credentials: 'include',
