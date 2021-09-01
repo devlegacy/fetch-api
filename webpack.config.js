@@ -27,38 +27,27 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
           {
             test: /\.(jpe?g|png|gif|webp|svg)$/i,
             exclude: /(fonts?)+/,
-            use: [
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 8192,
-                  //file loader https://github.com/webpack-contrib/file-loader
-                  fallback: 'file-loader',
-                  name: '[folder]/[name].[ext]',
-                  outputPath: 'assets/img',
-                },
+            parser: {
+              dataUrlCondition: {
+                maxSize: 8 * 1024, // 8kb
               },
-              {
-                loader: 'img-loader',
-              },
-            ],
+            },
+            generator: {
+              filename: 'assets/img/[folder]/[name].[ext]',
+            },
+            type: 'asset',
           },
           {
             test: /(fonts?)+.*\.(ttf|eot|otf|woff2?|svg)(\?v=\d+\.\d+\.\d+)?$/i,
-            exclude: /(imgs?|images?)/,
-            use: [
-              // cacheLoader,
-              {
-                loader: 'url-loader',
-                options: {
-                  limit: 8192,
-                  //file loader https://github.com/webpack-contrib/file-loader
-                  fallback: 'file-loader',
-                  name: '[name].[ext]',
-                  outputPath: 'assets/fonts',
-                },
+            parser: {
+              dataUrlCondition: {
+                maxSize: 8 * 1024, // 8kb
               },
-            ],
+            },
+            generator: {
+              filename: 'assets/fonts/[name].[ext]',
+            },
+            type: 'asset',
           },
           {
             test: /\.(sa|sc|c)ss$/,
