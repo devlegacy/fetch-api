@@ -3,8 +3,12 @@ const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
+const {
+  HtmlWebpackSkipAssetsPlugin,
+} = require('html-webpack-skip-assets-plugin');
 
+const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
+const isProduction = (mode) => mode !== 'production';
 module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
   console.log('[NODE_ENV]:', process.env.NODE_ENV);
   console.log(presets, mode);
@@ -96,25 +100,33 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // all options are optional
-          filename: '[name].css',
-          chunkFilename: '[id].css',
+          filename: isProduction(mode)
+            ? '[name].css'
+            : '[name].[contenthash].css',
+          chunkFilename: isProduction(mode)
+            ? '[id].css'
+            : '[id].[contenthash].css',
           ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
         new HtmlWebpackPlugin({
           title: 'What needs to be done? | To Do | App',
           filename: 'index.html',
           template: './src/templates/html/index.html',
+          skipAssets: [/assets\/css\/.*.js/],
         }),
         new HtmlWebpackPlugin({
           title: 'Practice | Fetch',
           filename: 'practices/index.html',
           template: './src/templates/html/practices/index.html',
+          skipAssets: [/assets\/css\/.*.js/],
         }),
         new HtmlWebpackPlugin({
           title: 'Practice | Upload',
           filename: 'upload/index.html',
           template: './src/templates/html/upload/index.html',
+          skipAssets: [/assets\/css\/.*.js/],
         }),
+        new HtmlWebpackSkipAssetsPlugin({}),
         new CopyPlugin({
           patterns: [
             { from: './src/assets/img/screenshots', to: 'screenshots' },
