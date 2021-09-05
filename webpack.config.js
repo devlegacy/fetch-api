@@ -6,6 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const {
   HtmlWebpackSkipAssetsPlugin,
 } = require('html-webpack-skip-assets-plugin');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
 const isProduction = (mode) => mode !== 'production';
@@ -108,6 +109,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
             : '[id].[contenthash].css',
           ignoreOrder: false, // Enable to remove warnings about conflicting order
         }),
+        new RemoveEmptyScriptsPlugin({}),
         new HtmlWebpackPlugin({
           title: 'What needs to be done? | To Do | App',
           filename: 'index.html',
