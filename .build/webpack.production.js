@@ -1,5 +1,4 @@
 const { cwd } = require('process');
-const { extendDefaultPlugins } = require('svgo');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const { resolve } = require('path');
 const AlterManifestWebpackPlugin = require('./plugins/alter-manifest-webpack-plugin/');
@@ -121,9 +120,22 @@ const manifest = {
   // },
 };
 module.exports = () => ({
+  devtool: false,
   optimization: {
     minimize: true,
-    minimizer: [`...`, new CssMinimizerPlugin()],
+    minimizer: [
+      `...`,
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+    ],
   },
   output: {
     filename: '[name].[fullhash:3].js',
@@ -205,7 +217,7 @@ module.exports = () => ({
           [
             'svgo',
             {
-              plugins: extendDefaultPlugins([
+              plugins: [
                 {
                   name: 'removeViewBox',
                   active: false,
@@ -216,7 +228,7 @@ module.exports = () => ({
                     attributes: [{ xmlns: 'http://www.w3.org/2000/svg' }],
                   },
                 },
-              ]),
+              ],
             },
           ],
         ],
