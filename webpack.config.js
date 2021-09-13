@@ -17,6 +17,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
   /** @type {import('webpack').Configuration} */
   const config = {
     mode,
+    stats: 'errors-only',
     context: __dirname,
     target: 'web',
     entry: {
