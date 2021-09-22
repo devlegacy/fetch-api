@@ -1,6 +1,5 @@
 const { alterManifest, manifest, favicons } = require('./plugins');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { alterManifest, manifest, favicons } = require('./plugins');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 const {
