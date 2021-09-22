@@ -1,6 +1,4 @@
-const {
-  HtmlWebpackSkipAssetsPlugin,
-} = require('html-webpack-skip-assets-plugin');
+const { HtmlWebpackSkipAssetsPlugin } = require('html-webpack-skip-assets-plugin');
 const { merge } = require('webpack-merge');
 const { resolve } = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
@@ -32,10 +30,17 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
     },
     module: {
       rules: [
+        // {
+        //   test: /\.tsx?$/,
+        //   use: 'ts-loader',
+        //   exclude: /node_modules/,
+        // },
         {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
+          test: /\.(js|jsx|ts|tsx)?$/,
+          loader: 'esbuild-loader',
+          options: {
+            loader: 'tsx',
+          },
         },
         {
           test: /\.(jpe?g|png|gif|webp|svg)$/i,
@@ -103,12 +108,8 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // all options are optional
-        filename: isProduction(mode)
-          ? '[name].css'
-          : '[name].[contenthash].css',
-        chunkFilename: isProduction(mode)
-          ? '[id].css'
-          : '[id].[contenthash].css',
+        filename: isProduction(mode) ? '[name].css' : '[name].[contenthash].css',
+        chunkFilename: isProduction(mode) ? '[id].css' : '[id].[contenthash].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
       new RemoveEmptyScriptsPlugin({}),
@@ -128,6 +129,12 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
         title: 'Practice | Upload',
         filename: 'upload/index.html',
         template: './src/templates/html/upload/index.html',
+        skipAssets: [/assets\/css\/.*.js/],
+      }),
+      new HtmlWebpackPlugin({
+        title: 'PWA | Service Workers',
+        filename: 'pwa/index.html',
+        template: './src/templates/html/pwa/index.html',
         skipAssets: [/assets\/css\/.*.js/],
       }),
       new HtmlWebpackSkipAssetsPlugin({}),
