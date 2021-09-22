@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google" content="nositelinkssearchbox" />
+    <meta name="google" content="notranslate" />
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <link rel="preconnect" href="https://jsonplaceholder.typicode.com" />
+    <link rel="dns-prefetch" href="https://jsonplaceholder.typicode.com" />
+
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <span class="has-text-link is-size-3">&#128640;</span>
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="navMenu"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href="/" class="button is-primary">
+                <strong>Home - To Do</strong>
+              </a>
+              <a href="/upload" class="button is-primary">
+                <strong>Practice - Upload</strong>
+              </a>
+              <a href="/practices" class="button is-primary">
+                <strong>Practice - Fetch</strong>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main id="app" class="container mt-6">
+      <button class="button" id="registerServiceWorker">Register service worker</button>
+      <button class="button" id="unregisterServiceWorker">Unregister service worker</button>
+      <button class="button" id="forceRegisterServiceWorker">Force register service worker</button>
+      <button class="button" id="deferredBannerPrompt">Banner app installation</button>
+    </main>
+  </body>
+</html>
