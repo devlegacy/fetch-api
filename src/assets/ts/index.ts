@@ -4,59 +4,34 @@ import { CreateToDoComponent } from './components/todo/create-to-do.component';
 import { UploadComponent } from './components/upload.component';
 import { PracticeComponent } from './components/practice.component';
 import { ServiceWorker } from './modules/pwa/service-worker';
+import { Banner } from './modules/pwa/banner';
 
 window.Dvx = {
   badge: 10,
   isServiceWorkerInstalled: false,
+  // let bannerEvent: null | BeforeInstallPromptEvent = null;
+  banner: null,
+  userChoice: null,
 };
 
 class App {
   async start(): Promise<void> {
-    // Banner installation
-    let bannerEvent: null | BeforeInstallPromptEvent = null;
-    window.addEventListener('beforeinstallprompt', (e: BeforeInstallPromptEvent) => {
-      console.log('[sw]: client', 'beforeinstallprompt Event fired', e);
-      e.preventDefault();
-      bannerEvent = e;
-      return false;
-    });
-    window.addEventListener('appinstalled', (e) => {
-      console.log('[sw - client]', 'app installed', e);
+    Banner.prevent();
+
+    const forceRegisterServiceWorker = document.getElementById('forceRegisterServiceWorker');
+    forceRegisterServiceWorker?.addEventListener('click', async () => {
+      await ServiceWorker.unregister();
+      await ServiceWorker.register();
     });
 
-    const forceRegister = document.getElementById('forceRegisterServiceWorker');
-    if (forceRegister) {
-      forceRegister.addEventListener('click', async () => {
-        await ServiceWorker.unregister();
-        await ServiceWorker.register();
-      });
-    }
+    const unregisterServiceWorker = document.getElementById('unregisterServiceWorker');
+    unregisterServiceWorker?.addEventListener('click', async () => await ServiceWorker.unregister());
+
+    const register = document.getElementById('registerServiceWorker');
+    register?.addEventListener('click', async () => await ServiceWorker.register());
 
     const deferredBannerPrompt = document.getElementById('deferredBannerPrompt');
-    if (deferredBannerPrompt) {
-      deferredBannerPrompt.addEventListener('click', async (e) => {
-        if (bannerEvent) {
-          try {
-            // The user has had a postive interaction with our app and Chrome
-            // has tried to prompt previously, so let's show the prompt.
-            bannerEvent.prompt();
-            // Follow what the user has done with the prompt.
-            const choice = await bannerEvent.userChoice;
-            console.log('[sw]: client', 'User choice', choice.outcome);
-            if (choice.outcome === 'dismissed') {
-              console.log('[sw]: client', 'User cancel installation');
-            } else {
-              console.log('[sw]: client', 'User added to homescreen');
-            }
-            // We no longer need the prompt.  Clear it up.
-            bannerEvent = null;
-            console.log(bannerEvent);
-          } catch (err) {
-            console.error('[sw]: client', 'Fail in install banner', err);
-          }
-        }
-      });
-    }
+    deferredBannerPrompt?.addEventListener('click', async (e) => Banner.deferredPrompt());
 
     document.addEventListener('DOMContentLoaded', () => {
       console.log('>> Start app');
