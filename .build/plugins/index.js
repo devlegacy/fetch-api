@@ -50,18 +50,18 @@ const manifest = {
   // https://www.w3.org/TR/appmanifest/#screenshots-member
   screenshots: [
     {
-      src: '/screenshots/mobile-fetch-api-screenshot.png',
+      src: '/assets/img/screenshots/mobile-fetch-api-screenshot.png',
       sizes: '752x1233',
       type: 'image/png',
     },
     // less than twice height
     {
-      src: '/screenshots/mobile-screenshot.jpg',
+      src: '/assets/img/screenshots/mobile-screenshot.jpg',
       sizes: '1080x2108',
       type: 'image/jpg',
     },
     {
-      src: '/screenshots/desktop-fetch-api-screenshot.png',
+      src: '/assets/img/screenshots/desktop-fetch-api-screenshot.png',
       sizes: '1919x1089',
       type: 'image/png',
     },

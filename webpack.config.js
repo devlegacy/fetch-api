@@ -1,9 +1,11 @@
 const { HtmlWebpackSkipAssetsPlugin } = require('html-webpack-skip-assets-plugin');
 const { merge } = require('webpack-merge');
 const { resolve } = require('path');
+const { sync } = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
@@ -140,9 +142,12 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
       new HtmlWebpackSkipAssetsPlugin({}),
       new CopyPlugin({
         patterns: [
-          { from: './src/assets/img/screenshots', to: 'screenshots' },
+          { from: './src/assets/img/screenshots', to: 'assets/img/screenshots' },
           { from: './src/assets/img/shortcuts', to: 'assets/img/shortcuts' },
         ],
+      }),
+      new PurgecssPlugin({
+        paths: sync(`${resolve(__dirname, './src')}/**/*`, { nodir: true }),
       }),
     ],
   };

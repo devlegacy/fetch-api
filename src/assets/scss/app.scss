@@ -1,18 +1,12 @@
-$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
-@import '~@fortawesome/fontawesome-free/scss/brands';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/v4-shims';
-
-// @import '~@fortawesome/fontawesome-free/css/brands';
-// @import '~@fortawesome/fontawesome-free/css/fontawesome';
-// @import '~@fortawesome/fontawesome-free/css/regular';
-// @import '~@fortawesome/fontawesome-free/css/solid';
-// @import '~@fortawesome/fontawesome-free/css/v4-shims';
+@charset 'UTF-8';
 
 @import '~normalize.css/normalize';
-@import '~bulma/css/bulma.css';
+
+// Reset
+// https://css-tricks.com/box-sizing/#universal-box-sizing-with-inheritance
+html {
+  box-sizing: border-box;
+}
 
 body {
   text-rendering: optimizeLegibility;
@@ -41,3 +35,24 @@ body {
     }
   }
 }
+
+// universal
+// https://css-tricks.com/box-sizing/#universal-box-sizing-with-inheritance
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+// fonts
+
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/v4-shims';
+
+@import '~bulma/css/bulma.css';
