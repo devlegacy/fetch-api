@@ -50,18 +50,18 @@ const manifest = {
   // https://www.w3.org/TR/appmanifest/#screenshots-member
   screenshots: [
     {
-      src: 'screenshots/mobile-fetch-api-screenshot.png',
+      src: '/screenshots/mobile-fetch-api-screenshot.png',
       sizes: '752x1233',
       type: 'image/png',
     },
     // less than twice height
     {
-      src: 'screenshots/mobile-screenshot.jpg',
+      src: '/screenshots/mobile-screenshot.jpg',
       sizes: '1080x2108',
       type: 'image/jpg',
     },
     {
-      src: 'screenshots/desktop-fetch-api-screenshot.png',
+      src: '/screenshots/desktop-fetch-api-screenshot.png',
       sizes: '1919x1089',
       type: 'image/png',
     },
@@ -71,38 +71,38 @@ const manifest = {
   shortcuts: [
     {
       name: 'What needs to be done? | To Do | App',
-      url: '/',
+      url: '/?utm_source=homescreen',
       description: 'List of events planned for today. What needs to be done? | To Do | App',
       icons: [
         {
-          src: '/android-chrome-96x96.png',
-          type: 'image/jpeg',
-          purpose: 'any',
-          sizes: '96x96',
+          src: '/assets/img/shortcuts/blue.png',
+          type: 'image/png',
+          purpose: 'any monochrome',
+          sizes: '192x192',
         },
       ],
     },
     {
       name: 'Practice | Fetch',
-      url: '/practices',
+      url: '/practices?utm_source=homescreen',
       icons: [
         {
-          src: '/android-chrome-96x96.png',
-          type: 'image/jpeg',
-          purpose: 'any',
-          sizes: '96x96',
+          src: '/assets/img/shortcuts/red.png',
+          type: 'image/png',
+          purpose: 'any monochrome',
+          sizes: '192x192',
         },
       ],
     },
     {
       name: 'Practice | Upload',
-      url: '/upload',
+      url: '/upload?utm_source=homescreen',
       icons: [
         {
-          src: '/android-chrome-96x96.png',
-          type: 'image/jpeg',
-          purpose: 'any',
-          sizes: '96x96',
+          src: '/assets/img/shortcuts/yellow.png',
+          type: 'image/png',
+          purpose: 'any monochrome',
+          sizes: '192x192',
         },
       ],
     },
@@ -142,7 +142,7 @@ module.exports.favicons = () =>
       display, // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
       orientation, // Default orientation: "any", "natural", "portrait" or "landscape". `string`
       scope: '/', // set of URLs that the browser considers within your app
-      start_url: '/?homescreen', // Start URL when launching the application from a device. `string`
+      start_url: '/?utm_source=homescreen', // Start URL when launching the application from a device. `string`
       version, // Your application's version string. `string`
       logging: false, // Print logs to console? `boolean`
       pixel_art: false, // Keeps pixels "sharp" when scaling up, for pixel art.  Only supported in offline mode.

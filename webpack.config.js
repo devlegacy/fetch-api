@@ -139,7 +139,10 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
       }),
       new HtmlWebpackSkipAssetsPlugin({}),
       new CopyPlugin({
-        patterns: [{ from: './src/assets/img/screenshots', to: 'screenshots' }],
+        patterns: [
+          { from: './src/assets/img/screenshots', to: 'screenshots' },
+          { from: './src/assets/img/shortcuts', to: 'assets/img/shortcuts' },
+        ],
       }),
     ],
   };

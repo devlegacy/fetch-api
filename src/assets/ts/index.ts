@@ -5,6 +5,7 @@ import { UploadComponent } from './components/upload.component';
 import { PracticeComponent } from './components/practice.component';
 import { ServiceWorker } from './modules/pwa/service-worker';
 import { Banner } from './modules/pwa/banner';
+import network from './modules/native/network';
 
 window.Dvx = {
   badge: 10,
@@ -16,6 +17,9 @@ window.Dvx = {
 
 class App {
   async start(): Promise<void> {
+    network.on('offline', (): void => {
+      console.log('on');
+    });
     Banner.prevent();
 
     const forceRegisterServiceWorker = document.getElementById('forceRegisterServiceWorker');
