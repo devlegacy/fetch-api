@@ -71,7 +71,7 @@ const manifest = {
   shortcuts: [
     {
       name: 'What needs to be done? | To Do | App',
-      url: '/?utm_source=homescreen',
+      url: '/?utm_source=homescreen&utm_medium=shortcut',
       description: 'List of events planned for today. What needs to be done? | To Do | App',
       icons: [
         {
@@ -84,7 +84,7 @@ const manifest = {
     },
     {
       name: 'Practice | Fetch',
-      url: '/practices?utm_source=homescreen',
+      url: '/practices?utm_source=homescreen&utm_medium=shortcut',
       icons: [
         {
           src: '/assets/img/shortcuts/red.png',
@@ -96,7 +96,7 @@ const manifest = {
     },
     {
       name: 'Practice | Upload',
-      url: '/upload?utm_source=homescreen',
+      url: '/upload?utm_source=homescreen&utm_medium=shortcut',
       icons: [
         {
           src: '/assets/img/shortcuts/yellow.png',
