@@ -86,8 +86,11 @@ Si necesitamos permitir request desde un dominio diferente al del servidor podem
 - [Non null assertion operator](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-0.html#non-null-assertion-operator)
 - [Differences in optional chaining and non null assertion](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-9.html#parsing-differences-in-optional-chaining-and-non-null-assertions)
 
-https://sass-lang.com/blog/node-fibers-discontinued
-"fibers": "^5.0.0",
+### Webpack notes
 
-https://web.dev/
-https://pwaexperts.io/
+- ESBuilder https://dev.to/burhanuday/cut-down-your-webpack-build-times-by-half-2bh6
+
+
+### Know issues
+
+"fibers": "^5.0.0" - https://sass-lang.com/blog/node-fibers-discontinued

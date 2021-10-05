@@ -41,6 +41,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
           test: /\.(js|jsx|ts|tsx)?$/,
           loader: 'esbuild-loader',
           options: {
+            // target: 'es2015',
             loader: 'tsx',
           },
         },

@@ -1,13 +1,17 @@
 const { alterManifest, manifest, favicons } = require('./plugins');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
-
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 module.exports = () => ({
   devtool: false,
   optimization: {
     minimize: true,
     minimizer: [
       `...`,
+      new ESBuildMinifyPlugin({
+        // target: 'es2015',
+        css: true,
+      }),
       new CssMinimizerPlugin({
         minimizerOptions: {
           preset: [
