@@ -1,62 +1,62 @@
 {
   "files.exclude": {
-    // Generics
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
+    // // Generics
+    // "**/.git": true,
+    // "**/.svn": true,
+    // "**/.hg": true,
+    // "**/CVS": true,
+    // "**/.DS_Store": true,
 
-    // Config files
-    ".vscode": false,
-    ".babelrc": true,
-    ".browserslistrc": true,
-    ".csscomb.json": true,
-    ".editorconfig": true,
-    ".eslintignore": true,
-    ".eslintrc.js": true,
-    ".php_cs": true,
-    ".prettierrc": true,
-    "babel.config.js": true,
-    "postcss.config.js": true,
-    "tailwind.config.js": true,
-    "vue.config.js": true,
+    // // Config files
+    // ".vscode": false,
+    // ".babelrc": true,
+    // ".browserslistrc": true,
+    // ".csscomb.json": true,
+    // ".editorconfig": true,
+    // ".eslintignore": true,
+    // ".eslintrc.js": true,
+    // ".php_cs": true,
+    // ".prettierrc": true,
+    // "babel.config.js": true,
+    // "postcss.config.js": true,
+    // "tailwind.config.js": true,
+    // "vue.config.js": true,
 
-    // DOC files
-    "LICENSE": true,
-    "license": true,
+    // // DOC files
+    // "LICENSE": true,
+    // "license": true,
 
-    // Git files
-    "*git*": true, // For .gitginote, .gitattirbutes
+    // // Git files
+    // "*git*": true, // For .gitginote, .gitattirbutes
 
-    // ?
-    "nbproject": true,
+    // // ?
+    // "nbproject": true,
 
-    // NodeJS
-    // "**/node_modules/": true,
+    // // NodeJS
+    // // "**/node_modules/": true,
 
-    // Angular
-    "**/e2e/": true,
-    // "**/*.js": true,
-    "**/*.map": true,
+    // // Angular
+    // "**/e2e/": true,
+    // // "**/*.js": true,
+    // "**/*.map": true,
 
-    // Laravel
-    "vendor/": true,
-    "bootstrap/": true,
-    "storage/": true,
-    // "tests/": true,
-    "_ide_helper.php": true,
-    ".phpstorm.meta.php": true,
-    "artisan": true,
-    "server.php": true,
-    "*.example": true,
-    // "*.yml": true,
-    // "*.xml": true,
-    "*lock*": true, // For package-lock.json, composer.lock
+    // // Laravel
+    // "vendor/": true,
+    // "bootstrap/": true,
+    // "storage/": true,
+    // // "tests/": true,
+    // "_ide_helper.php": true,
+    // ".phpstorm.meta.php": true,
+    // "artisan": true,
+    // "server.php": true,
+    // "*.example": true,
+    // // "*.yml": true,
+    // // "*.xml": true,
+    // "*lock*": true, // For package-lock.json, composer.lock
 
-    // Codeginiter 3
-    "user_guide": true,
-    "system": true
+    // // Codeginiter 3
+    // "user_guide": true,
+    // "system": true
   },
   "workbench.colorCustomizations": {
     // "titleBar.activeBackground": "#fa707a",
