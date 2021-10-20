@@ -24,6 +24,7 @@ const {
   APP_RELATED_APPLICATIONS: string_related_applications,
 } = require('dotenv').config().parsed || process.env;
 const manifest = {
+  id: '/?utm_source=homescreen',
   background,
   theme_color,
   // https://www.w3.org/TR/appmanifest/#related_applications-member
@@ -174,11 +175,5 @@ module.exports.manifest = () =>
   new InjectManifest({
     swSrc: './src/assets/ts/sw.ts',
     swDest: 'sw.js',
-    exclude: [
-      /\.map$/,
-      /manifest$/,
-      // /\.htaccess$/,
-      /service-worker\.js$/,
-      /sw\.js$/,
-    ],
+    exclude: [/\.map$/, /manifest$/, /\.htaccess$/, /service-worker\.js$/, /sw\.js$/],
   });
