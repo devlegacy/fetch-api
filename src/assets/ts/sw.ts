@@ -1,8 +1,16 @@
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
+import { clearAllData, writeData } from './config/indexdb';
 
-// @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
-precacheAndRoute(self.__WB_MANIFEST);
+/**
+ * Pre cache manifest data
+ * Exclude metadata from webpack
+ * Exclude service worker
+ */
+precacheAndRoute(
+  // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
+  self.__WB_MANIFEST.filter((data: any) => ['.hot-update.json', 'browser-sync', 'sw.js'].includes(data.url))
+);
 
 registerRoute(
   // (routeData) => {
@@ -47,3 +55,20 @@ registerRoute(
     //   .catch((err) => console.error('[sw]:', 'Fetch, falló respondWith', err));
   }
 );
+
+registerRoute('https://jsonplaceholder.typicode.com/todos/?_limit=20', async (args) => {
+  const e = args.event;
+  const res = await fetch(e.request);
+  const resClone = res.clone();
+
+  await clearAllData('posts');
+  const data = await resClone.json();
+  for (const key in data) {
+    try {
+      writeData('posts', data[key]);
+    } catch (err) {
+      console.log('[sw - err]:', 'Write data in sw', err);
+    }
+  }
+  return res;
+});
