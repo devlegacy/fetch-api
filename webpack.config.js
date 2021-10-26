@@ -16,6 +16,11 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
 
   /** @type {import('webpack').Configuration} */
   const config = {
+    cache: {
+      type: 'filesystem',
+      allowCollectingMemory: true,
+      cacheDirectory: resolve(__dirname, '.cache'),
+    },
     mode,
     stats: 'errors-only',
     context: __dirname,
