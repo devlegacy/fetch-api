@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all --parallel watch serve:local serve:api",
+    "prebuild": "rm -Rf ./.cache ./public ; exit 0",
     "build": "cross-env NODE_ENV=production webpack --progress --config webpack.config.js --mode=production --env presets=typescript",
     "deploy": "cross-env NODE_ENV=production webpack --config webpack.config.js --mode=production --env presets=typescript && netlify-lambda build server",
     "watch": "cross-env NODE_ENV=development npm run build -- --watch --mode=development ",
