@@ -1,4 +1,4 @@
 [build]
-  command = " npm i && npm audit fix && npm run build" # the command you run to build this file
+  command = "npm i && npm run build" # the command you run to build this file
   functions = "functions" # netlify-lambda builds to this folder AND Netlify reads functions from here
   publish = "public" # [public] builds to this folder, Netlify should serve all these files statically
