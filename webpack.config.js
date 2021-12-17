@@ -48,6 +48,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
           options: {
             // target: 'es2015',
             loader: 'tsx',
+            // tsconfigRaw: require('./tsconfig.json'),
           },
         },
         {
