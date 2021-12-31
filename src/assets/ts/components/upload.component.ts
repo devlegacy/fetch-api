@@ -2,9 +2,7 @@ import { ComponentOption } from '../core/options/component-option';
 import { BaseComponent } from '../core/components/base-component';
 import { RenderedComponent } from '../core/components/rendered-component';
 
-export class UploadComponent
-  extends BaseComponent
-  implements RenderedComponent {
+export class UploadComponent extends BaseComponent implements RenderedComponent {
   constructor(options: ComponentOption) {
     super(options);
   }
@@ -12,6 +10,7 @@ export class UploadComponent
   private handlerUploadInputName($form: Element) {
     const $file = <HTMLInputElement>$form?.querySelector('#file');
     $file?.addEventListener('change', (e: Event) => {
+      console.log((<HTMLInputElement>e.target).files);
       const files = (<HTMLInputElement>e.target).files; // $files.files
       if (files && files.length > 0) {
         const $filename = $form?.querySelector('.file-name');
@@ -39,19 +38,16 @@ export class UploadComponent
           'https://jsfetchapi.netlify.app/upload/',
           ''
         )}`
-      : `http://localhost:8000${target.action.replace(
-          'http://localhost:8000/upload/',
-          ''
-        )}`;
+      : `http://localhost:8000${target.action.replace('http://localhost:8080/upload', '')}`;
+    console.log(target.action);
+    console.log(api);
     fetch(api, {
       method: 'POST',
       body,
     })
       .then((response: Response) => response.text())
       .then((data: string) => alert(data))
-      .catch((err: Error) =>
-        console.error('[Upload fetch error]:', err.message)
-      );
+      .catch((err: Error) => console.error('[Upload fetch error]:', err.message));
     return false;
   }
 
