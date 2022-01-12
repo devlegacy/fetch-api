@@ -2,6 +2,18 @@ import { precacheAndRoute, PrecacheEntry } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { clearAllData, writeData } from './config/indexdb';
 
+self.addEventListener('message', (event) => {
+  // console.log('skipWaiting', event.data);
+
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    console.log('skipWaiting', event.data);
+
+    // The promise that skipWaiting() returns can be safely ignored.
+    // @ts-ignore
+    self.skipWaiting();
+  }
+});
+
 // @ts-ignore
 const manifest: Array<PrecacheEntry> = self.__WB_MANIFEST;
 

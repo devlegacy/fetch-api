@@ -23,15 +23,24 @@ class App {
     });
     Banner.prevent();
 
+    const skipWaitingServiceWorker = document.getElementById('skipWaitingServiceWorker');
+    skipWaitingServiceWorker?.addEventListener('click', async () => {
+      await ServiceWorker.skipWaiting();
+    });
+
     const reloadRegisterServiceWorker = document.getElementById('reloadRegisterServiceWorker');
     reloadRegisterServiceWorker?.addEventListener('click', async () => {
       reloadRegisterServiceWorker.classList.toggle('is-loading');
       console.log('[sw]: unregister');
       await ServiceWorker.unregister();
       console.log('[sw]: register');
-      await ServiceWorker.register();
+      await ServiceWorker.register('/sw.js');
 
       reloadRegisterServiceWorker.classList.toggle('is-loading');
+
+      await ServiceWorker.skipWaiting();
+
+      window.location.reload();
     });
 
     const unregisterServiceWorker = document.getElementById('unregisterServiceWorker');
