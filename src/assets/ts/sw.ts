@@ -1,16 +1,22 @@
-import { precacheAndRoute } from 'workbox-precaching';
+import { precacheAndRoute, PrecacheEntry } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { clearAllData, writeData } from './config/indexdb';
 
+// @ts-ignore
+const manifest: Array<PrecacheEntry> = self.__WB_MANIFEST;
+
+console.log(manifest);
 /**
  * Pre cache manifest data
  * Exclude metadata from webpack
  * Exclude service worker
  */
-precacheAndRoute(
-  // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
-  self.__WB_MANIFEST.filter((data: any) => ['.hot-update.json', 'browser-sync', 'sw.js'].includes(data.url))
-);
+if (manifest) {
+  precacheAndRoute(
+    // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
+    manifest.filter((data) => /(\.hot\-update\.json|browser\-sync|sw\.js)$/.test(data.url))
+  );
+}
 
 registerRoute(
   // (routeData) => {

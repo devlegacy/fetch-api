@@ -13,6 +13,7 @@ window.Dvx = {
   // let bannerEvent: null | BeforeInstallPromptEvent = null;
   banner: null,
   userChoice: null,
+  ...(window.Dvx || {}),
 };
 
 class App {
@@ -22,10 +23,15 @@ class App {
     });
     Banner.prevent();
 
-    const forceRegisterServiceWorker = document.getElementById('forceRegisterServiceWorker');
-    forceRegisterServiceWorker?.addEventListener('click', async () => {
+    const reloadRegisterServiceWorker = document.getElementById('reloadRegisterServiceWorker');
+    reloadRegisterServiceWorker?.addEventListener('click', async () => {
+      reloadRegisterServiceWorker.classList.toggle('is-loading');
+      console.log('[sw]: unregister');
       await ServiceWorker.unregister();
+      console.log('[sw]: register');
       await ServiceWorker.register();
+
+      reloadRegisterServiceWorker.classList.toggle('is-loading');
     });
 
     const unregisterServiceWorker = document.getElementById('unregisterServiceWorker');

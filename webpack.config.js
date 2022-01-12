@@ -7,9 +7,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
+const webpack = require('webpack');
 
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
 const isProduction = (mode) => mode !== 'production';
+const dotEnv = require('dotenv').config().parsed || process.env;
+
 module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
   console.log('[NODE_ENV]:', process.env.NODE_ENV);
   console.log(presets, mode);
