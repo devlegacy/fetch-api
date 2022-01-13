@@ -2,6 +2,10 @@
 
 @import '~normalize.css/normalize';
 
+:root {
+  --network: -51.33px;
+}
+
 // Reset
 // https://css-tricks.com/box-sizing/#universal-box-sizing-with-inheritance
 html {
@@ -56,3 +60,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/v4-shims';
 
 @import '~bulma/css/bulma.css';
+
+.network {
+  position: sticky;
+  bottom: var(--network);
+}

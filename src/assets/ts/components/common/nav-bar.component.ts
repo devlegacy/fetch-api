@@ -5,18 +5,13 @@ import { RenderedComponent } from '../../core/components/rendered-component';
 const DEFAULT_TARGET = 'navMenu';
 const NAV_TOGGLE_CLASS = 'is-active';
 
-export class NavBarComponent
-  extends BaseComponent
-  implements RenderedComponent {
+export class NavBarComponent extends BaseComponent implements RenderedComponent {
   constructor(options: ComponentOption) {
     super(options);
   }
 
   private findNavBarElements(): Array<HTMLElement> {
-    return Array.prototype.slice.call(
-      document.querySelectorAll(this.selector),
-      0
-    );
+    return Array.prototype.slice.call(document.querySelectorAll(this.selector), 0);
   }
 
   private handlerNavBarClick($nav: HTMLElement) {
@@ -35,10 +30,6 @@ export class NavBarComponent
     // Get all "navbar-burger" elements
     const $navbarBurger = this.findNavBarElements();
 
-    // Check if there are any navbar burgers
-    // if ($navbarBurgers.length > 0) {
-    // Add a click event on each of them
     $navbarBurger?.forEach(this.handlerNavBarClick);
-    // }
   }
 }

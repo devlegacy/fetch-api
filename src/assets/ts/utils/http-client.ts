@@ -6,27 +6,23 @@ enum HttpMethod {
 }
 
 export class HttpClient {
-  get(url: string): Promise<any> {
+  get<T>(url: string): Promise<T> {
     return HttpClient.configureRequest(url, HttpMethod.GET);
   }
 
-  destroy(url: string): Promise<any> {
+  destroy<T>(url: string): Promise<T> {
     return HttpClient.configureRequest(url, HttpMethod.DELETE);
   }
 
-  post(url: string, body: object): Promise<any> {
+  post<T>(url: string, body: object): Promise<T> {
     return HttpClient.configureRequest(url, HttpMethod.POST, body);
   }
 
-  update(url: string, body: object): Promise<any> {
-    return HttpClient.configureRequest(url, HttpMethod.PUT, body);
+  update<T>(url: string, body: object): Promise<T> {
+    return HttpClient.configureRequest<T>(url, HttpMethod.PUT, body);
   }
 
-  static async configureRequest(
-    url: string,
-    method: string,
-    body?: object
-  ): Promise<any> {
+  static async configureRequest<T>(url: string, method: string, body?: object): Promise<T> {
     const response = await fetch(url, {
       method,
       body: JSON.stringify(body),

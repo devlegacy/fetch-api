@@ -10,21 +10,21 @@ export class ToDoService {
     this.http = new HttpClient();
   }
 
-  getAll(limit: number = 20): Promise<Array<Post>> {
-    return this.http.get(`${this.serviceURL}?_limit=${limit}`);
+  getAll(limit: number = 20) {
+    return this.http.get<Array<Post>>(`${this.serviceURL}?_limit=${limit}`);
   }
 
   find() {}
 
   create(post: Post) {
-    return this.http.post(`${this.serviceURL}`, post);
+    return this.http.post<Post>(`${this.serviceURL}`, post);
   }
 
   update(post: Post) {
-    return this.http.update(`${this.serviceURL}${post.id}`, post);
+    return this.http.update<Post>(`${this.serviceURL}${post.id}`, post);
   }
 
   destroy(post: Post) {
-    return this.http.destroy(`${this.serviceURL}${post.id}`);
+    return this.http.destroy<Post>(`${this.serviceURL}${post.id}`);
   }
 }
