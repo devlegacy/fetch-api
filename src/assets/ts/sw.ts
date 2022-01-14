@@ -89,6 +89,6 @@ if (manifest) {
 
   precacheAndRoute(
     // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
-    manifest.filter((data) => filters.test(data.url)).concat(customRoutesToCache)
+    manifest.filter((data) => !filters.test(data.url)).concat(customRoutesToCache)
   );
 }
