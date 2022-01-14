@@ -14,22 +14,6 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// @ts-ignore
-const manifest: Array<PrecacheEntry> = self.__WB_MANIFEST;
-
-console.log(manifest);
-/**
- * Pre cache manifest data
- * Exclude metadata from webpack
- * Exclude service worker
- */
-if (manifest) {
-  precacheAndRoute(
-    // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
-    manifest.filter((data) => /(\.hot\-update\.json|browser\-sync|sw\.js)$/.test(data.url))
-  );
-}
-
 registerRoute(
   // (routeData) => {
   // return routeData.event.request.headers.get('accept').includes('text/html');
@@ -90,3 +74,21 @@ registerRoute('https://jsonplaceholder.typicode.com/todos/?_limit=20', async (ar
   }
   return res;
 });
+
+// @ts-ignore
+const manifest: Array<PrecacheEntry> = self.__WB_MANIFEST;
+
+/**
+ * Pre cache manifest data
+ * Exclude metadata from webpack
+ * Exclude service worker
+ */
+if (manifest) {
+  const filters = /(\.hot\-update\.json|browser\-sync|sw\.js)$/;
+  const customRoutesToCache = [`/practices`, `/upload`, `/pwa`, `/?utm=homescreen`, `/`];
+
+  precacheAndRoute(
+    // @ts-ignore: __WB_MANIFEST is a placeholder filled by workbox-webpack-plugin with the list of dependencies to be cached
+    manifest.filter((data) => filters.test(data.url)).concat(customRoutesToCache)
+  );
+}

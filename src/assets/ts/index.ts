@@ -20,7 +20,7 @@ class App {
     new Network((isOnline) => {
       const $network = document.querySelector('.network');
       const $networkStatus = document.querySelector('.network-status');
-      document.documentElement.style.setProperty('--network', '0');
+      // document.documentElement.style.setProperty('--network', '0');
 
       if (isOnline) {
         $networkStatus?.classList.remove('fa', 'fa-ban', 'has-text-danger');
@@ -61,9 +61,9 @@ class App {
     const $reloadRegisterServiceWorker = document.getElementById('reloadRegisterServiceWorker');
     $reloadRegisterServiceWorker?.addEventListener('click', async () => {
       $reloadRegisterServiceWorker.classList.toggle('is-loading');
-      console.log('[sw]: unregister');
+      console.log('[sw client]: unregister');
       await ServiceWorker.unregister();
-      console.log('[sw]: register');
+      console.log('[sw client]: register');
       await ServiceWorker.register('/sw.js');
 
       $reloadRegisterServiceWorker.classList.toggle('is-loading');
@@ -98,7 +98,7 @@ class App {
       // @ts-expect-error
       const badge = await navigator.setAppBadge(window.Dvx.badge);
 
-      console.log('[pwa]:client', 'badge', badge);
+      console.log('[pwa client]:', 'badge', badge);
 
       const counterInterval = setInterval(async () => {
         console.log('interval');
@@ -115,7 +115,7 @@ class App {
 
       //
     } else {
-      console.log('[pwa]: client', 'App badge is not supported.');
+      console.log('[pwa client]:', 'App badge is not supported.');
     }
   }
 }

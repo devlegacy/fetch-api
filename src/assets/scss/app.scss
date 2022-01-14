@@ -62,6 +62,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~bulma/css/bulma.css';
 
 .network {
-  position: sticky;
-  bottom: var(--network);
+  position: fixed;
+  left: 0;
+  right: 0;
+  // bottom: var(--network);
 }
