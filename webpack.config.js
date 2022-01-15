@@ -9,20 +9,33 @@ const PurgecssPlugin = require('purgecss-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const webpack = require('webpack');
 const { cwd } = require('process');
+const { existsSync } = require('fs');
 
 const envLoader = (mode) => {
-  const dotenvExpand = require('dotenv-expand');
-  const env =
-    require('dotenv').config({
-      path: !isProduction(mode) ? '.env' : `.env.${mode}`,
-    }) || process.env;
+  const file = !isProduction(mode) ? '.env' : `.env.${mode}`;
 
-  const expand = dotenvExpand(env).parsed;
+  try {
+    if (existsSync(file)) {
+      const dotenvExpand = require('dotenv-expand');
+      const env =
+        require('dotenv').config({
+          path: file,
+        }) || process.env;
 
-  process.env.NODE_ENV = expand.APP_ENV;
-  process.env.APP_ENV = expand.APP_ENV;
+      const expand = dotenvExpand(env).parsed;
 
-  return expand;
+      process.env.NODE_ENV = expand.APP_ENV;
+      process.env.APP_ENV = expand.APP_ENV;
+
+      return expand;
+    }
+    const env = process.env;
+
+    process.env.NODE_ENV = env.APP_ENV;
+    process.env.APP_ENV = env.APP_ENV;
+  } catch (err) {
+    console.error(err);
+  }
 };
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
 const isProduction = (mode) => mode === 'production';
