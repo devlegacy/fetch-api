@@ -1,9 +1,12 @@
-const { alterManifest, manifest, favicons } = require('./plugins');
+const { favicons, alterManifest, injectManifest } = require('./plugins');
+const { envLoader } = require('../webpack.config');
+const { ESBuildMinifyPlugin } = require('esbuild-loader');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
 module.exports = () => {
+  const env = envLoader(process.env.APP_ENV);
+
   /** @type {import('webpack').Configuration} */
   const config = {
     devtool: false,
@@ -61,9 +64,9 @@ module.exports = () => {
     },
     output: {
       filename: '[name].[fullhash:3].js',
-      publicPath: '/',
+      publicPath: env.APP_URL,
     },
-    plugins: [favicons(), alterManifest(), manifest()],
+    plugins: [favicons(), alterManifest(), injectManifest()],
   };
   return config;
 };

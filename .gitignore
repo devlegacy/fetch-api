@@ -733,3 +733,4 @@ $RECYCLE.BIN/
 server/uploads/
 public/js
 public/*
+.env.production

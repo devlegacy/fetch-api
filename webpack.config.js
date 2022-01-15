@@ -4,18 +4,51 @@ const { resolve } = require('path');
 const { sync } = require('glob');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { default: MiniCssExtractPlugin } = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const webpack = require('webpack');
+const { cwd } = require('process');
 
+const envLoader = (mode) => {
+  const dotenvExpand = require('dotenv-expand');
+  const env =
+    require('dotenv').config({
+      path: !isProduction(mode) ? '.env' : `.env.${mode}`,
+    }) || process.env;
+
+  const expand = dotenvExpand(env).parsed;
+
+  process.env.NODE_ENV = expand.APP_ENV;
+  process.env.APP_ENV = expand.APP_ENV;
+
+  return expand;
+};
 const modeConfig = (mode) => require(`./.build/webpack.${mode}`)(mode);
-const isProduction = (mode) => mode !== 'production';
-const dotEnv = require('dotenv').config().parsed || process.env;
+const isProduction = (mode) => mode === 'production';
 
 module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
+  const env = envLoader(mode);
+
   console.log('[NODE_ENV]:', process.env.NODE_ENV);
+  console.log('[APP_ENV]:', process.env.APP_ENV);
   console.log(presets, mode);
+
+  const customHTMLOptions = {
+    isProduction: isProduction(mode),
+    publicPath: env.APP_URL,
+    cwd: cwd(),
+    GOOGLE_SITE_VERIFICATION: env.GOOGLE_SITE_VERIFICATION || '',
+    GA_TRAKING_ID: env.GA_TRAKING_ID || '',
+    G_AD_CLIENT: env.G_AD_CLIENT || '',
+    GOOGLE_MAP_API_KEY: env.GOOGLE_MAP_API_KEY || '',
+    BING_MAP_API_KEY: env.BING_MAP_API_KEY || '',
+  };
+
+  const definitions = {
+    APP_ENV: JSON.stringify(isProduction(mode) ? 'production' : 'development'),
+    APP_URL: JSON.stringify(env.APP_URL),
+  };
 
   /** @type {import('webpack').Configuration} */
   const config = {
@@ -63,7 +96,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
             },
           },
           generator: {
-            filename: 'assets/img/[folder]/[name].[ext]',
+            filename: 'assets/img/[hash]-[name][ext]',
           },
           type: 'asset',
         },
@@ -75,7 +108,7 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
             },
           },
           generator: {
-            filename: 'assets/fonts/[name].[ext]',
+            filename: 'assets/fonts/[name][ext]',
           },
           type: 'asset',
         },
@@ -120,8 +153,8 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
       new MiniCssExtractPlugin({
         // Options similar to the same options in webpackOptions.output
         // all options are optional
-        filename: isProduction(mode) ? '[name].css' : '[name].[contenthash].css',
-        chunkFilename: isProduction(mode) ? '[id].css' : '[id].[contenthash].css',
+        filename: !isProduction(mode) ? '[name].css' : '[name].[contenthash].css',
+        chunkFilename: !isProduction(mode) ? '[id].css' : '[id].[contenthash].css',
         ignoreOrder: false, // Enable to remove warnings about conflicting order
       }),
       new RemoveEmptyScriptsPlugin({}),
@@ -130,24 +163,28 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
         filename: 'index.html',
         template: './src/templates/html/index.html',
         skipAssets: [/assets\/css\/.*.js/],
+        ...customHTMLOptions,
       }),
       new HtmlWebpackPlugin({
         title: 'Practice | Fetch',
         filename: 'practices/index.html',
         template: './src/templates/html/practices/index.html',
         skipAssets: [/assets\/css\/.*.js/],
+        ...customHTMLOptions,
       }),
       new HtmlWebpackPlugin({
         title: 'Practice | Upload',
         filename: 'upload/index.html',
         template: './src/templates/html/upload/index.html',
         skipAssets: [/assets\/css\/.*.js/],
+        ...customHTMLOptions,
       }),
       new HtmlWebpackPlugin({
         title: 'PWA | Service Workers',
         filename: 'pwa/index.html',
         template: './src/templates/html/pwa/index.html',
         skipAssets: [/assets\/css\/.*.js/],
+        ...customHTMLOptions,
       }),
       new HtmlWebpackSkipAssetsPlugin({}),
       new CopyPlugin({
@@ -159,8 +196,11 @@ module.exports = ({ presets } = env, { mode = 'production' } = argv) => {
       new PurgecssPlugin({
         paths: sync(`${resolve(__dirname, './src')}/**/*`, { nodir: true }),
       }),
+      new webpack.DefinePlugin(definitions),
     ],
   };
 
   return merge(config, modeConfig(mode));
 };
+
+module.exports.envLoader = envLoader;

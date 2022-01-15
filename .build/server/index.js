@@ -1,4 +1,6 @@
-const { WEBPACK_DEV_SERVER_PORT } = require('dotenv').config().parsed || process.env;
+const { envLoader } = require('../../webpack.config');
+
+const { WEBPACK_DEV_SERVER_PORT } = envLoader(process.env.APP_ENV);
 
 /** @type {import("webpack-dev-server").Configuration} */
 module.exports.devServer = {

@@ -3,8 +3,10 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 const { resolve } = require('path');
 const AlterManifestWebpackPlugin = require('./alter-manifest-webpack-plugin/');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const { envLoader } = require('../../webpack.config');
 
 const {
+  APP_URL: APP_URL,
   APP_LANG: lang,
   APP_DIR: dir,
   APP_NAME: appName,
@@ -21,14 +23,17 @@ const {
   APP_VERSION: version,
   // APP_SERVICE_WORKER_SRC: src,
   // APP_SERVICE_WORKER_UPDATE_VIA_CACHE: update_via_cache,
-  APP_RELATED_APPLICATIONS: string_related_applications,
-} = require('dotenv').config().parsed || process.env;
+  APP_RELATED_APPLICATIONS: related_applications,
+} = envLoader(process.env.APP_ENV);
+console.log(related_applications);
+console.log(typeof related_applications);
 const manifest = {
-  id: '/?utm_source=homescreen',
+  id: `${APP_URL}?utm_source=homescreen`,
   background,
   theme_color,
   // https://www.w3.org/TR/appmanifest/#related_applications-member
   related_applications: [
+    ...JSON.parse(related_applications || '[]'),
     // {
     //   platform: 'play',
     //   url: 'https://play.google.com/store/apps/details?id=com.example.app1',
@@ -122,14 +127,14 @@ module.exports.favicons = () =>
   new FaviconsWebpackPlugin({
     logo: resolve(cwd(), './src/favicon.svg'),
     // cache: true,
-    publicPath: '/',
+    publicPath: `${APP_URL}`,
     outputPath: './',
     prefix: '',
     inject: true,
     devMode: 'webapp',
     manifest,
     favicons: {
-      path: '/', // Path for overriding default icons  `string`
+      path: `${APP_URL}`, // Path for overriding default icons  `string`
       appName, // Your application's name. `string`
       appShortName, // Your application's short_name. `string`. Optional. If not set, appName will be used
       appDescription, // Your application's description. `string`
@@ -142,12 +147,15 @@ module.exports.favicons = () =>
       appleStatusBarStyle, // Style for Apple status bar: "black-translucent", "default", "black". `string`
       display, // Preferred display mode: "fullscreen", "standalone", "minimal-ui" or "browser". `string`
       orientation, // Default orientation: "any", "natural", "portrait" or "landscape". `string`
-      scope: '/', // set of URLs that the browser considers within your app
-      start_url: '/?utm_source=homescreen', // Start URL when launching the application from a device. `string`
+      scope: `${APP_URL}`, // set of URLs that the browser considers within your app
+      start_url: `${APP_URL}?utm_source=homescreen`, // Start URL when launching the application from a device. `string`
+      preferRelatedApplications: false, // Should the browser prompt the user to install the native companion app. `boolean`
+      relatedApplications: undefined, // Information about the native companion apps. This will only be used if `preferRelatedApplications` is `true`. `Array<{ id: string, url: string, platform: string }>`
       version, // Your application's version string. `string`
       logging: false, // Print logs to console? `boolean`
       pixel_art: false, // Keeps pixels "sharp" when scaling up, for pixel art.  Only supported in offline mode.
       loadManifestWithCredentials: false, // Browsers don't send cookies when fetching a manifest, enable this to fix that. `boolean`
+      manifestMaskable: false, // Maskable source image(s) for manifest.json. "true" to use default source. More information at https://web.dev/maskable-icon/. `boolean`, `string`, `buffer` or array of `string`
       icons: {
         // Platform Options:
         // - offset - offset in percentage
@@ -171,7 +179,7 @@ module.exports.favicons = () =>
     },
   });
 module.exports.alterManifest = () => new AlterManifestWebpackPlugin(manifest);
-module.exports.manifest = () =>
+module.exports.injectManifest = () =>
   new InjectManifest({
     swSrc: './src/assets/ts/sw.ts',
     swDest: 'sw.js',
