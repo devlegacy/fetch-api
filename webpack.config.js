@@ -33,6 +33,8 @@ const envLoader = (mode) => {
 
     process.env.NODE_ENV = env.APP_ENV;
     process.env.APP_ENV = env.APP_ENV;
+
+    return env;
   } catch (err) {
     console.error(err);
   }
