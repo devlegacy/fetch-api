@@ -17,6 +17,7 @@ window.Dvx = {
 
 class App {
   async start(): Promise<void> {
+    const serviceWorker = ServiceWorker.getInstance();
     new Network((isOnline) => {
       const $network = document.querySelector('.network');
       const $networkStatus = document.querySelector('.network-status');
@@ -55,29 +56,32 @@ class App {
 
     const $skipWaitingServiceWorker = document.getElementById('skipWaitingServiceWorker');
     $skipWaitingServiceWorker?.addEventListener('click', async () => {
-      await ServiceWorker.skipWaiting();
+      await serviceWorker.skipWaiting();
     });
 
     const $reloadRegisterServiceWorker = document.getElementById('reloadRegisterServiceWorker');
     $reloadRegisterServiceWorker?.addEventListener('click', async () => {
       $reloadRegisterServiceWorker.classList.toggle('is-loading');
       console.log('[sw client]: unregister');
-      await ServiceWorker.unregister();
+      await serviceWorker.unregister();
       console.log('[sw client]: register');
-      await ServiceWorker.register('/sw.js');
+      await serviceWorker.register('/sw.js', () => confirm('Updates are available, Would you like to reload?'));
 
       $reloadRegisterServiceWorker.classList.toggle('is-loading');
 
-      await ServiceWorker.skipWaiting();
+      await serviceWorker.skipWaiting();
 
       window.location.reload();
     });
 
     const $unregisterServiceWorker = document.getElementById('unregisterServiceWorker');
-    $unregisterServiceWorker?.addEventListener('click', async () => await ServiceWorker.unregister());
+    $unregisterServiceWorker?.addEventListener('click', async () => await serviceWorker.unregister());
 
     const $register = document.getElementById('registerServiceWorker');
-    $register?.addEventListener('click', async () => await ServiceWorker.register());
+    $register?.addEventListener(
+      'click',
+      async () => await serviceWorker.register('/sw.js', () => confirm('Updates are available, Would you like to reload?'))
+    );
 
     const $deferredBannerPrompt = document.getElementById('deferredBannerPrompt');
     $deferredBannerPrompt?.addEventListener('click', async (e) => Banner.deferredPrompt());
@@ -92,7 +96,7 @@ class App {
       new CreateToDoComponent({ selector: '#frm-create-post' }).render();
     });
 
-    await ServiceWorker.register();
+    await serviceWorker.register('/sw.js', () => confirm('Updates are available, Would you like to reload?'));
 
     if ('setAppBadge' in navigator) {
       // @ts-expect-error

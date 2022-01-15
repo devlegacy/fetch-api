@@ -1,4 +1,4 @@
-import { HttpClient } from '../utils/http-client';
+import { HttpClient } from '../modules/http-client';
 import { ApiConfig } from '../config/api-config';
 import { Post } from '../models/post';
 

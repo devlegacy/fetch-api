@@ -1,12 +1,13 @@
 import { precacheAndRoute, PrecacheEntry } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { clearAllData, writeData } from './config/indexdb';
+import { log } from './helpers/console';
 
 self.addEventListener('message', (event) => {
   // console.log('skipWaiting', event.data);
 
   if (event.data && event.data.type === 'SKIP_WAITING') {
-    console.log('skipWaiting', event.data);
+    log('[sw]:', 'skipWaiting', event.data);
 
     // The promise that skipWaiting() returns can be safely ignored.
     // @ts-ignore
