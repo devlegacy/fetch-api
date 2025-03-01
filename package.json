@@ -1,8 +1,8 @@
 {
-  "name": "api-fetch",
+  "name": "js-fetch-api",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "start": "npm-run-all --parallel watch serve:local serve:api",
     "prebuild": "rm -Rf ./.cache ./public ; exit 0",
@@ -20,7 +20,7 @@
     "prune:export": "ts-unused-exports tsconfig.json --allowUnusedTypes"
   },
   "keywords": [],
-  "author": "Samuel R. <samuel@devexteam.com> (https://devexteam.com)",
+  "author": "Samuel R. <contact@jstsamuel.dev> (https://jstsamuel.dev)",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^17.0.8",
